@@ -1,0 +1,10 @@
+﻿<UserControl x:Class="StatusBar.Views.LTE"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"             
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             Height="30" Width="30">
+    <Grid>
+        <Image Source="{Binding LTEPower}"/>
+    </Grid>
+</UserControl>

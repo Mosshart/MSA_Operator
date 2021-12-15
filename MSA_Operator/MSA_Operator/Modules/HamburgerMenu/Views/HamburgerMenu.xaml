@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="HamburgerMenu.Views.HamburgerMenu"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"             
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             Width="1920" Height="1024"
+             Background="Transparent"
+             >
+    <Grid>
+        <StackPanel Background="#ffff" VerticalAlignment="Center" HorizontalAlignment="Left" Width="320" Height="1024" Orientation="Vertical">
+            <Button Style="{StaticResource BlankButton}" Margin="0,0,0,0" Height="50">
+                <Label Style="{StaticResource Label17}"> Ulubione lokalizacje</Label>
+            </Button>
+            <Button Style="{StaticResource BlankButton}" Margin="0,0,0,0" Height="50">
+                <Label Style="{StaticResource Label17}">Ulubione trasy</Label>
+            </Button>
+            <Button Style="{StaticResource BlankButton}" Margin="0,0,0,0" Height="50">
+                <Label Style="{StaticResource Label17}">Panel administratora</Label>
+            </Button>
+            <Button Style="{StaticResource BlankButton}" Margin="0,0,0,0" Height="50">
+                <Label Style="{StaticResource Label17}">Ustawienia</Label>
+            </Button>
+            <Button Style="{StaticResource BlankButton}" Margin="0,0,0,0" Height="50">
+                <Label Style="{StaticResource Label17}">Dziennik tras</Label>
+            </Button>
+            <Button Command="{Binding LogOffCommand}" Style="{StaticResource BlankButton}" Margin="0,0,0,0" Height="50">
+                <Label Style="{StaticResource Label17}">Wyloguj</Label>
+            </Button>
+            <Button Command="{Binding ExitCommand}" Style="{StaticResource BlankButton}" Margin="0,0,0,0" Height="50">
+                <Label Style="{StaticResource Label17}">Wyjdź</Label>
+            </Button>
+        </StackPanel>
+
+        <Button Style="{StaticResource BlankButton}" Command="{Binding HideMenuCommand}" Width="1600" Height="1026" Margin="320,0,0,0" />
+    </Grid>
+</UserControl>

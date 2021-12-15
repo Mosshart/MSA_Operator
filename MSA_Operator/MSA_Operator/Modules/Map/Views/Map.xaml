@@ -1,0 +1,77 @@
+﻿<UserControl x:Class="Map.Views.Map"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/" 
+             xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
+             xmlns:core="clr-namespace:Map.Core"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             Height="1024" Width="1920">
+
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="UserControl.Loaded">
+            <BeginStoryboard>
+                <Storyboard Storyboard.TargetProperty="(UserControl.Opacity)">
+                    <DoubleAnimation From="0" To="1" Duration="0:0:1.3"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="UserControl.Unloaded">
+            <BeginStoryboard>
+                <Storyboard Storyboard.TargetProperty="(UserControl.Opacity)">
+                    <DoubleAnimation From="1" To="0" Duration="0:0:1.3"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </UserControl.Triggers>
+
+    <Grid>
+        <m:Map CredentialsProvider="AttsGkqIHCOIEA11KtQZDphl5bi8lppin64jeg-ZOOhiS4cdHA_EXJwHSbyZi4Xo"
+               AnimationLevel="Full" 
+               Mode="{Binding MapDetails.Mode}"
+               ZoomLevel="{Binding MapDetails.ZoomLevel}"
+               Center="{Binding MapDetails.Location}"
+               x:Name="MainMap" Margin="0,0,0,-55"
+               core:MapInteractivity.MapViewChange="{Binding IsSetView}"
+               core:MapInteractivity.MapRouteChange ="{Binding SetRoute}"
+               core:MapInteractivity.AddPinInCenterChanged="{Binding AddPin}">
+
+            <Canvas Name="Operator" m:MapLayer.Position="{Binding MapDetails.OperatorLocation}"
+                    m:MapLayer.PositionOrigin="BottomCenter" Width="30" Height="30">
+                    <Image Source="../Images/Icon_Operator_home.png"/>
+            </Canvas>
+            <!--<Canvas Name="MidPin" m:MapLayer.Position="{Binding MapDetails.MidPinLocation}"
+                    m:MapLayer.PositionOrigin="BottomCenter" Width="30" Height="30">
+                <Image Source="../Images/Icon_Destination.png"/>
+            </Canvas>-->
+            <Canvas Name="Robot" m:MapLayer.Position="{Binding MapDetails.RobotLocation}"
+                    m:MapLayer.PositionOrigin="BottomCenter" Width="30" Height="56">
+                <Image Source="../Images/Icon_Location_direction.png" RenderTransformOrigin=".5,.732142857">
+                    <Image.RenderTransform>
+                        <RotateTransform Angle="{Binding MapDetails.RobotOrientation}"/>
+                    </Image.RenderTransform>
+                </Image>
+            </Canvas>
+
+            <!--<Line   X1="0" 
+                    Y1="0" 
+                    X2="{Binding ElementName='MainMap', Path='ActualWidth'}" 
+                    Y2="{Binding ElementName='MainMap', Path='ActualHeight'}" 
+                    Stroke="Black" StrokeThickness="3" />
+            <Line   X1="0" 
+                    Y1="{Binding ElementName='MainMap', Path='ActualHeight'}" 
+                    X2="{Binding ElementName='MainMap', Path='ActualWidth'}" 
+                    Y2="0" Stroke="Black" StrokeThickness="3" />-->
+            <Image Height="30" Width="30" Style="{StaticResource ShadowImage}" Source="../Images/Icon_Destination.png"/>
+        </m:Map>
+
+        <Button Style="{StaticResource BlankButton}" Margin="1840,380,16,580" 
+                Command="{Binding ChangeMapLayer}" IsEnabled="{Binding CanChangeLayer}">
+            <Image Style="{StaticResource ShadowImage}" Source="../Images/Button_layers.png"/>
+        </Button>
+        <ContentControl Margin="1286,16,30,668" prism:RegionManager.RegionName="CameraMinimized"/>
+        <ContentControl Margin="1840,853,16,107" prism:RegionManager.RegionName="LocalizenBtnRegion"/>
+        <!--<ContentControl Margin="30,864,1730,56" prism:RegionManager.RegionName="MovementButton"/>-->
+        <!--<ContentControl Margin="1840,848,16,112" prism:RegionManager.RegionName="LocalizeBtn"/>-->
+        <ContentControl Margin="0,0,0,0" prism:RegionManager.RegionName="LocalizeOverlay"/>
+    </Grid>
+</UserControl>

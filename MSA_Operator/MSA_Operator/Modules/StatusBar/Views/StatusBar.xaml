@@ -1,0 +1,27 @@
+﻿ <UserControl x:Class="StatusBar.Views.StatusBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"             
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:UC="clr-namespace:StatusBar.Views"
+             Height="56" Width="1920"
+             Background="#2B5CFB"
+>
+    <Grid>
+        <UC:Battery Margin="1729 ,10,103,14" ModelType="Operator"/>
+        <UC:Battery Margin="13,10,1819,14" ModelType="Robot"/>
+        <UC:Clock Margin="1832 ,10,32,14"/>
+        <UC:GPS Margin="1656,12,234,14" />
+        <UC:LTE Margin="1702,12,188,14"  />
+        <!--ROBOT-->
+      
+        <UC:Wifi Margin="115,13,1775,13"/>
+        <UC:Sattelite Margin="161,10,1696,13"/>
+        
+        <!--TEST-->
+        <Label Name="nameTest" Content="{Binding Wlan.WifiName}" HorizontalAlignment="Left" Margin="805,13,0,0" VerticalAlignment="Top" />
+        <Label Name="powerTest" Content="{Binding Wlan.WifiPower}" HorizontalAlignment="Left" Margin="805,23,0,0" VerticalAlignment="Top" />
+        <Label Name="locLatTest" Content="{Binding GeoLoc.Latitude}" HorizontalAlignment="Left" Margin="1015,13,0,0" VerticalAlignment="Top" />
+        <Label Name="locLonTest" Content="{Binding GeoLoc.Longtitude}" HorizontalAlignment="Left" Margin="1015,23,0,0" VerticalAlignment="Top" />
+    </Grid>
+</UserControl>

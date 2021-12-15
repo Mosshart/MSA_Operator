@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="Localize.Views.ShowOverlay"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"             
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             Width="64" Height="64">
+    <Grid>
+        <Button Background="Transparent"
+                Command="{Binding NavigateCommand}"
+                CommandParameter="MainOverlay" 
+                BorderThickness="0"
+                BorderBrush="Transparent"
+                Style="{StaticResource BlankButton}"
+                >
+            <Image Style="{StaticResource ShadowImage}" Source="../Images/Button_FAB_Show_location.png" Margin="0"/>
+        </Button>
+        
+    </Grid>
+</UserControl>

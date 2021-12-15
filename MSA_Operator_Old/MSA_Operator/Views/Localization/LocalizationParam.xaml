@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="MSA_Operator.Views.Localization.LocalizationParam"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MSA_Operator.Views.Localization"
+             xmlns:localizationViewModel="clr-namespace:MSA_Operator.ViewModels.LocalizationViewModel"
+             mc:Ignorable="d" 
+             Background="#FFFFFF"
+             d:DesignHeight="56" d:DesignWidth="1920">
+    <UserControl.DataContext>
+        <localizationViewModel:LocalizationParam/>
+    </UserControl.DataContext>
+    <Grid>
+       
+        <!--<Button BorderThickness="0" Foreground="Transparent" Background="Transparent" Margin="0,0,0,0" Command="{Binding onLocalizationButton}"/>-->
+       
+        <Image  Source="/Images/Localization_Icons/Icon_Last.png " Margin="28,13,1862,13" Width="30" Height="30"/>
+        <Label  Margin="98,10,1008,10" Content="{Binding LocalizationText}" FontFamily="Titillium Web" FontSize="17"/>
+    </Grid>
+</UserControl>

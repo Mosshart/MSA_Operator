@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{60A8649A-BCA1-488C-816C-A902F1DE4B18}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Localization</RootNamespace>
+    <AssemblyName>Localization</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Business\Location.cs" />
+    <Compile Include="LocalizationModule.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\FavoriteLocalizationListViewModel.cs" />
+    <Compile Include="ViewModels\ListHeaderBtnViewModel.cs" />
+    <Compile Include="ViewModels\LocalizationDetailsViewModel.cs" />
+    <Compile Include="ViewModels\LocalizationListBtnViewModel.cs" />
+    <Compile Include="ViewModels\LocalizationListViewModel.cs" />
+    <Compile Include="Views\FavoriteLocalizationList.xaml.cs">
+      <DependentUpon>FavoriteLocalizationList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ListHeaderBtn.xaml.cs">
+      <DependentUpon>ListHeaderBtn.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LocalizationDetails.xaml.cs">
+      <DependentUpon>LocalizationDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LocalizationList.xaml.cs">
+      <DependentUpon>LocalizationList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LocalizationListBtn.xaml.cs">
+      <DependentUpon>LocalizationListBtn.xaml</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icon_More.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Prism.Wpf" Version="7.2.0.1422" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Views\FavoriteLocalizationList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ListHeaderBtn.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LocalizationDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LocalizationList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LocalizationListBtn.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Button_FAB_Start_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icon_Add.png" />
+    <Resource Include="Images\Icon_Destination.png" />
+    <Resource Include="Images\Icon_Vehicle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icon_Back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icon_Last.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icon_Favorite.png" />
+    <Resource Include="Images\Icon_Pin_drop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icon_Expand_right.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\MSAEventAggregator.Core\MSAEventAggregator.Core.csproj">
+      <Project>{D24623F6-A4DB-4789-A540-7AFBE0DB0DCA}</Project>
+      <Name>MSAEventAggregator.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icon_SortArrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icon_Sort_AZ.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

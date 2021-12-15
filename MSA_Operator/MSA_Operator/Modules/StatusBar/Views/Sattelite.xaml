@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="StatusBar.Views.Sattelite"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"             
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             Height="33" Width="63">
+    <UserControl.Resources>
+        <BitmapImage x:Key="Icon_Sattelite" UriSource="../Images/Icon_Sattelite.png" />
+        </UserControl.Resources>
+    <Grid>
+        <Image Source="{StaticResource Icon_Sattelite}" Margin="0,3,33,0" />
+        <TextBlock
+            Margin="37,-2,0,3"
+            Foreground="#FFFFFF"
+            TextAlignment="Left"
+            Text="{Binding SatelliteNumber}" 
+            FontFamily="Titillium Web" FontSize="24" Opacity="0.9"
+            Width="26" Height="32"
+        />
+    </Grid>
+</UserControl>

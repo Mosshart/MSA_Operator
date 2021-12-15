@@ -1,0 +1,54 @@
+﻿<UserControl x:Class="MovementButton.Views.MovementButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             Height="160" Width="160"      
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:behaviours="clr-namespace:MovementButton.Behaviours">
+    <Grid>
+        <i:Interaction.Behaviors>
+            <behaviours:MouseBehaviour MouseX="{Binding PanelX, Mode=OneWayToSource}"
+                                  MouseY="{Binding PanelY, Mode=OneWayToSource}"
+                                  MouseLeftButtonClicked="{Binding IsClicked, Mode=OneWayToSource}"
+                                  MouseLeftButtonReleased="{Binding IsClicked, Mode=OneWayToSource}">
+
+            </behaviours:MouseBehaviour>
+        </i:Interaction.Behaviors>
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="MouseLeftButtonDown">
+                <i:InvokeCommandAction Command="{Binding Path=OnClickCommand}"/>
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
+
+
+
+        <Image Source="../Images/Control_Dark.png"/>
+        <Image Source="{Binding ButtonStyle}"/>
+
+
+        <Ellipse Height="160" Width="160" Fill="Transparent"/>
+        <Grid>
+            <Grid.RenderTransform>
+                <!-- <RotateTransform  CenterX="80" CenterY="80" Angle="0"></RotateTransform>-->
+                <TranslateTransform X="{Binding VisualX}" Y="{Binding VisualY}"></TranslateTransform>
+            </Grid.RenderTransform>
+            <Ellipse Height="80" Width="80" Fill="Transparent"/>
+        </Grid>
+        <Grid>
+            <Grid.RenderTransform>
+                <!-- <RotateTransform  CenterX="80" CenterY="80" Angle="0"></RotateTransform>-->
+                <TranslateTransform 
+                    X="{Binding VisualDotX}" 
+                    Y="{Binding VisualDotY}"/>
+            </Grid.RenderTransform>
+            <Ellipse Height="80" Width="80" Fill="#2B5CFB"/>
+        </Grid>
+        <Label Content="{Binding LabelX}" HorizontalAlignment="Left" Margin="10,113,0,0" VerticalAlignment="Top" Width="50" Height="29"/>
+        <Label Content="{Binding LabelY}" HorizontalAlignment="Left" Margin="95,113,0,0" VerticalAlignment="Top" Width="55" Height="25"/>
+        <Label Content="{Binding LabelRed}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="140" Height="25"/>
+    </Grid>
+</UserControl>
+
+
+<!--#2B5CFB-->

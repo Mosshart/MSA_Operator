@@ -1,0 +1,26 @@
+﻿<Window x:Class="MSA_Operator.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel="True"     
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen" WindowState="Maximized"
+        Title="{Binding Title}" Height="1080" Width="1920">
+    <Grid>
+        <!--<ContentControl Margin="0,172,0,824" prism:RegionManager.RegionName="StatusBar" />-->
+        <!--<ContentControl Margin="0,56,0,0" prism:RegionManager.RegionName="Localize"/>-->
+        <ContentControl Margin="0,56,0,0" prism:RegionManager.RegionName="MainRegion"/>
+        <ContentControl Margin="0,0,0,1024" prism:RegionManager.RegionName="StatusBar"/> 
+        <ContentControl Margin="1840,992,16,24" prism:RegionManager.RegionName="LocalizationListBtnRegion"/>
+        <ContentControl Margin="16,80,1840,936" prism:RegionManager.RegionName="HamburgerMenuBtnRegion"/>
+        
+        <!--<ContentControl Margin="16,672,1840,344" prism:RegionManager.RegionName="ReturnHomeBtnRegion"/>-->
+        <ContentControl Margin="16,672,1840,344" prism:RegionManager.RegionName="ReturnHomeBtnRegion"/>
+        <ContentControl Margin="30,864,1730,56" prism:RegionManager.RegionName="MovementButtonRegion"/>
+        
+        <ContentControl Margin="0,56,0,0" prism:RegionManager.RegionName="LocalizationRegion"/>
+        <!---->
+        <!--<ContentControl Margin="-320,56,1913,0" prism:RegionManager.RegionName="HamburgerMenuRegion"/>-->
+        <ContentControl Margin="0,56,0,0" prism:RegionManager.RegionName="HamburgerMenuRegion"/>
+    </Grid>
+</Window>

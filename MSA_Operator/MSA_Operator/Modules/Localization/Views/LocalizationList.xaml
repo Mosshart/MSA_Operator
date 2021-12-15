@@ -1,0 +1,203 @@
+﻿  <UserControl x:Class="Localization.Views.LocalizationList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"       
+             xmlns:UC="clr-namespace:Localization.Views"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             prism:ViewModelLocator.AutoWireViewModel="True" Width="1920" Height="1024" 
+             Background="Transparent">
+    <UserControl.Resources>
+        <Style TargetType="ListBoxItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border BorderThickness="{TemplateBinding Border.BorderThickness}"
+                                  Padding="0,0,0,0"
+                                  Height="56"
+                                  BorderBrush="{TemplateBinding Border.BorderBrush}"
+                                  Background="{TemplateBinding Panel.Background}"
+                                  Name="Bd"
+                                  SnapsToDevicePixels="True">
+                            <ContentPresenter Content="{TemplateBinding ContentControl.Content}"
+                                   ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}"
+                                   ContentStringFormat="{TemplateBinding ContentControl.ContentStringFormat}"
+                                   HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}"
+                                   VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}"
+                                   SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="Selector.IsSelectionActive" Value="False"/>
+                                    <Condition Property="Selector.IsSelected" Value="True"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Panel.Background" TargetName="Bd" 
+                                        Value="Transparent"/>
+                                <Setter Property="Border.BorderBrush" TargetName="Bd">
+                                    <Setter.Value>
+                                        <SolidColorBrush>Transparent</SolidColorBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="Selector.IsSelectionActive" Value="True"/>
+                                    <Condition Property="Selector.IsSelected" Value="True"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Panel.Background" TargetName="Bd" Value="Transparent"/>
+                                <Setter Property="Border.BorderBrush" TargetName="Bd">
+                                    <Setter.Value>
+                                        <SolidColorBrush>Transparent</SolidColorBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </MultiTrigger>
+                            <Trigger Property="UIElement.IsMouseOver" Value="True">
+                                <Setter Property="Panel.Background" TargetName="Bd" 
+                                        Value="Transparent"/>
+                                <Setter Property="Border.BorderBrush" TargetName="Bd">
+                                    <Setter.Value>
+                                        <SolidColorBrush>Transparent</SolidColorBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="UIElement.IsEnabled" Value="False">
+                                <Setter Property="TextElement.Foreground" TargetName="Bd">
+                                    <Setter.Value>
+                                        <DynamicResource ResourceKey="{x:Static SystemColors.GrayTextBrushKey}" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+    <!--Button Find localization-->
+        <Grid>
+            <StackPanel Background="#FFFFFF" Margin="0,232,0,728"  Orientation="Horizontal" >
+                    <StackPanel.Resources>
+                        <Style TargetType="{x:Type Label}">
+                            <Setter Property="Margin" Value="0,21,0,10"/>
+                        </Style>
+                        <Style TargetType="{x:Type Image}">
+                            <Setter Property="Margin" Value="28,21,40,13"/>
+                        </Style>
+                    </StackPanel.Resources>
+                    <Image  Source="../Images/Icon_Pin_drop.png" Width="30" Height="30"/>
+                    <Label   Content="Zaznacz lokalizację na mapie"  
+                             FontFamily="Titillium Web" FontSize="17"  Foreground="#050B46"
+                             Width="292"/>
+                </StackPanel>
+
+            <Button Margin="0,232,0,728"  Style="{StaticResource BlankButton}"/>
+            <Border Margin="0,232,0,728" BorderThickness="0,0,0,1" BorderBrush="#050B46" Opacity="0.6"/>
+
+    <!--Button Favorite-->
+
+            <StackPanel Background="#FFFFFF"  Margin="0,296,0,672"  Orientation="Horizontal" >
+                <StackPanel.Resources>
+                    <Style TargetType="{x:Type Label}">
+                        <Setter Property="Margin" Value="0,10,0,10"/>
+                    </Style>
+                    <Style TargetType="{x:Type Image}">
+                        <Setter Property="Margin" Value="28,13,40,13"/>
+                    </Style>
+                </StackPanel.Resources>
+                <Image  Source="../Images/Icon_Favorite.png" Width="30" Height="30"/>
+                <Label   Content="Ulubione lokalizacje"  
+                         FontFamily="Titillium Web" FontSize="17" Foreground="#050B46" />
+                <Image  Source="../Images/Icon_Expand_right.png" Margin="1608,13,33,13" Width="30" Height="30"/>
+                <!--<Border BorderThickness="0,0,0,1" BorderBrush="Black"></Border>-->
+            </StackPanel>
+
+            <Border BorderThickness="0,0,0,1" BorderBrush="#050B46" Opacity="0.6"/>
+            <Button Margin="0,296,0,672"  Style="{StaticResource BlankButton}" Command="{Binding NavigateToFavoriteListCommand}"/>
+ 
+            <Border Margin="0,296,0,672" BorderThickness="0,0,0,1" BorderBrush="#050B46" Opacity="0.6"/>
+      
+    <!--LISTA-->
+            <ListBox   x:Name="_listOfLocations"  
+                       Foreground="Transparent" BorderThickness="0" 
+                       Margin="-2,352,0,0" ItemsSource="{Binding Locations}" 
+                       ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                       ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <prism:InvokeCommandAction Command="{Binding LocationSelectedCommand}" CommandParameter="{Binding SelectedItem, ElementName=_listOfLocations}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderThickness="0,0,0,1" BorderBrush="#050B46" Opacity="0.6" Width="1920">
+                            <StackPanel Orientation="Horizontal" Background="Transparent">
+                                <StackPanel.Resources>
+                                    <Style TargetType="{x:Type Label}">
+                                        <Setter Property="Margin" Value="0,10,0,10"/>
+                                    </Style>
+                                    <Style TargetType="{x:Type Image}">
+                                        <Setter Property="Margin" Value="28,13,40,13"/>
+                                    </Style>                                    
+                                </StackPanel.Resources>
+                                <Image   Source="../Images/Icon_Last.png" Width="30" Height="30"/>
+                                <Label   Content="{Binding LocationText}" Foreground="#050B46" FontFamily="Titillium Web" FontSize="17"/>
+                        </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                    
+                </ListBox.ItemTemplate>
+            </ListBox>            
+            <Grid.Triggers>
+                <EventTrigger RoutedEvent="Grid.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard >
+                            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" BeginTime="00:00:00">
+                                <SplineThicknessKeyFrame KeyTime="00:00:00" Value="0,1024,0,0" />
+                                <SplineThicknessKeyFrame KeyTime="00:00:00.4" Value="0,0,0,0" />
+                            </ThicknessAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="Grid.Unloaded">
+                    <BeginStoryboard>
+                        <Storyboard >
+                            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" BeginTime="00:00:00">
+                                <SplineThicknessKeyFrame KeyTime="00:00:00" Value="0,0,0,0" />
+                                <SplineThicknessKeyFrame KeyTime="00:00:00.4" Value="0,1024,0,0" />
+                            </ThicknessAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Grid.Triggers>
+        </Grid>
+
+        <ContentControl  Margin="0,0,0,792" prism:RegionManager.RegionName="LocalizationDetails">
+            <ContentControl.Triggers>
+                <EventTrigger RoutedEvent="ContentControl.Loaded"> 
+                    <BeginStoryboard>
+                        <Storyboard >
+                            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" BeginTime="00:00:00">
+                                <SplineThicknessKeyFrame KeyTime="00:00:00" Value="0,-232,0,1024" />
+                                <SplineThicknessKeyFrame KeyTime="00:00:00.4" Value="0,0,0,792" />
+                            </ThicknessAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="ContentControl.Unloaded">
+                    <BeginStoryboard>
+                        <Storyboard >
+                            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" BeginTime="00:00:00">
+                                <SplineThicknessKeyFrame KeyTime="00:00:00" Value="0,0,0,792"  />
+                                <SplineThicknessKeyFrame KeyTime="00:00:00.4"  Value="0,-232,0,1024"/>
+                            </ThicknessAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </ContentControl.Triggers>
+
+
+        </ContentControl>
+    </Grid>
+</UserControl>

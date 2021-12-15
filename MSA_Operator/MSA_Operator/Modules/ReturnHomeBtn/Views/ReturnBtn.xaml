@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="ReturnHomeBtn.Views.ReturnBtn"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"             
+             prism:ViewModelLocator.AutoWireViewModel="True">
+    <Grid>
+        <Button 
+                Command="{Binding NavigateCommand}"
+                CommandParameter="MainOverlay" 
+                Style="{StaticResource BlankButton}">
+
+            <Image Style="{StaticResource ShadowImage}" Source="../Images/Button_Back_Home.png" Margin="0"></Image>
+        </Button>
+    </Grid>
+</UserControl>

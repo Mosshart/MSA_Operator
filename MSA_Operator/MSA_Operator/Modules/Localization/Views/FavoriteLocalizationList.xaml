@@ -1,0 +1,160 @@
+﻿<UserControl x:Class="Localization.Views.FavoriteLocalizationList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"             
+             prism:ViewModelLocator.AutoWireViewModel="True">
+    <UserControl.Resources>
+        <Style TargetType="ListBoxItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border BorderThickness="{TemplateBinding Border.BorderThickness}"
+                                  Padding="0,0,0,0"
+                                  Height="56"
+                                  BorderBrush="{TemplateBinding Border.BorderBrush}"
+                                  Background="{TemplateBinding Panel.Background}"
+                                  Name="Bd"
+                                  SnapsToDevicePixels="True">
+                            <ContentPresenter Content="{TemplateBinding ContentControl.Content}"
+                                   ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}"
+                                   ContentStringFormat="{TemplateBinding ContentControl.ContentStringFormat}"
+                                   HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}"
+                                   VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}"
+                                   SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="Selector.IsSelectionActive" Value="False"/>
+                                    <Condition Property="Selector.IsSelected" Value="True"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Panel.Background" TargetName="Bd" 
+                                        Value="Transparent"/>
+                                <Setter Property="Border.BorderBrush" TargetName="Bd">
+                                    <Setter.Value>
+                                        <SolidColorBrush>Transparent</SolidColorBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="Selector.IsSelectionActive" Value="True"/>
+                                    <Condition Property="Selector.IsSelected" Value="True"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Panel.Background" TargetName="Bd" Value="Transparent"/>
+                                <Setter Property="Border.BorderBrush" TargetName="Bd">
+                                    <Setter.Value>
+                                        <SolidColorBrush>Transparent</SolidColorBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </MultiTrigger>
+                            <Trigger Property="UIElement.IsMouseOver" Value="True">
+                                <Setter Property="Panel.Background" TargetName="Bd" 
+                                        Value="Transparent"/>
+                                <Setter Property="Border.BorderBrush" TargetName="Bd">
+                                    <Setter.Value>
+                                        <SolidColorBrush>Transparent</SolidColorBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="UIElement.IsEnabled" Value="False">
+                                <Setter Property="TextElement.Foreground" TargetName="Bd">
+                                    <Setter.Value>
+                                        <DynamicResource ResourceKey="{x:Static SystemColors.GrayTextBrushKey}" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Background="#FFFFFF">
+        <StackPanel Orientation="Vertical">
+            <!--<Button Style="{StaticResource BlankButton}" Width="1920" Height="74" Command="{Binding NavigateBack}">
+               
+                <Image Source="../Images/Icon_Back.png"/>
+               
+            </Button>-->
+            <StackPanel Orientation="Horizontal">
+                <Button Margin="28,21,24,23"
+                    Command="{Binding NavigateBackCommand}" 
+                    Style="{StaticResource BlankButton}">
+                    <Image Source="../Images/Icon_Back.png" />
+                </Button>
+                <Label Margin="0,20,0,21" Style="{StaticResource Label24}" Content="Wybierz lokalizację"/>
+                <!--FontFamily="Titillium Web" Foreground="#050B46" FontSize="24" BorderBrush="Transparent" BorderThickness="0">Wybierz lokalizację</Label>-->
+            </StackPanel>
+            <StackPanel Width="1920" Orientation="Horizontal">
+                <Button Style="{StaticResource BlankButton}" Command="{Binding SetArrowPositionCommand}" CommandParameter="1">
+                    <StackPanel Margin="99,33,370,17" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" >
+                        <Image Height="16" Width="16" Source="../Images/Icon_SortArrow.png" Visibility="{Binding Visibility1}" RenderTransformOrigin="0.5,0.5">
+                            <Image.RenderTransform>
+                                <TransformGroup>
+                                    <RotateTransform Angle="{Binding ArrowDirection}"/>
+                                </TransformGroup>
+                            </Image.RenderTransform>
+                        </Image>
+                        <Label Padding="5,7" Style="{StaticResource LabelBold15}">Nazwa</Label>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource BlankButton}" Command="{Binding SetArrowPositionCommand}" CommandParameter="2">
+                    <StackPanel Margin="99,33,370,17" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" >
+                        <Image Height="16" Width="16" Source="../Images/Icon_SortArrow.png" Visibility="{Binding Visibility2}" RenderTransformOrigin="0.5,0.5">
+                            <Image.RenderTransform>
+                                <TransformGroup>
+                                    <RotateTransform Angle="{Binding ArrowDirection}"/>
+                                </TransformGroup>
+                            </Image.RenderTransform>
+                        </Image>
+                        <Label Padding="5,7" Style="{StaticResource LabelBold15}">Data</Label>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource BlankButton}" Command="{Binding SetArrowPositionCommand}" CommandParameter="3">
+                    <StackPanel Margin="99,33,370,17" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" >
+                        <Image  Height="16" Width="16" Source="../Images/Icon_SortArrow.png" Visibility="{Binding Visibility3}" RenderTransformOrigin="0.5,0.5">
+                            <Image.RenderTransform>
+                                <TransformGroup>
+                                    <RotateTransform Angle="{Binding ArrowDirection}"/>
+                                </TransformGroup>
+                            </Image.RenderTransform>
+                        </Image>
+                        <Label Padding="5,7" Style="{StaticResource LabelBold15}">Dodane przez</Label>
+                    </StackPanel>
+                </Button>                
+                <!--<Button Style="{StaticResource BlankButton}" VerticalAlignment="Center" HorizontalAlignment="Right"  Content="CCCCCCCCCCCC" Width="50" Height="72"/>-->
+            </StackPanel>
+           
+            <ListBox>
+                <ListBoxItem Height="70"/>
+                <ListBoxItem Height="70"/>
+                <ListBoxItem Height="70"/>
+                <ListBoxItem Height="70"/>
+                <ListBoxItem Height="70"/>
+                <ListBoxItem Height="70"/>
+            </ListBox>
+        </StackPanel>
+      
+        <!--<Grid  Margin="1693,103,30,727" >
+            <Button  Style="{StaticResource BlankButton}" Margin="0,0,0,3" HorizontalAlignment="Right" 
+                    VerticalAlignment="Top"
+                    Width="30" Height="30">
+                <Image Source="../Images/Icon_Sort_AZ.png"/>
+            </Button>
+            <Border CornerRadius="10"  BorderThickness="1,1,1,1" BorderBrush="#FFFFFF" Margin="0,33,0,0" Height="164" VerticalAlignment="Top">
+                --><!--<Border.Effect>
+                    <DropShadowEffect  Direction="270" BlurRadius="25" Opacity="0.2" Color="Black"/>
+                </Border.Effect>--><!--
+                <Grid  Background="#FFFFFF" Width="192" Height="160">
+                    <StackPanel Orientation="Vertical">
+                        <Button Style="{StaticResource BlankButton}" Height="46" Content="Nazwa"/>
+                        <Button Style="{StaticResource BlankButton}" Height="46" Content="Data"/>
+                        <Button Style="{StaticResource BlankButton}" Height="46" Content="Dodane przez"/>
+                    </StackPanel>
+                 </Grid>
+            </Border>
+        </Grid>-->
+    </Grid>
+</UserControl>

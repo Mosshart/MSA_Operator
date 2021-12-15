@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "20d2ff2b-b853-4a30-ae88-82d7d603a925": {
+      "ProjectGuid": "20d2ff2b-b853-4a30-ae88-82d7d603a925",
+      "DisplayName": "Map",
+      "ColorIndex": 0
+    },
+    "bd29fa18-f927-46cb-a153-f22d68287829": {
+      "ProjectGuid": "bd29fa18-f927-46cb-a153-f22d68287829",
+      "DisplayName": "Login",
+      "ColorIndex": 1
+    }
+  },
+  "NextColorIndex": 2
+}

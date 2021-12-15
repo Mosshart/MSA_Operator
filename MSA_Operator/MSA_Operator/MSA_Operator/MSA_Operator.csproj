@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6927BF56-6F92-49FB-9C06-8EA0733E3E4E}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MSA_Operator</RootNamespace>
+    <AssemblyName>MSA_Operator</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ros-communication, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libraries\ros-communication.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Device" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="Styles\ImageStyleDictionary.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\ListBoxStyleDictionary.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\CheckBoxStyleDictionary.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\ButtonStyleDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\FontStyleDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\LabelStyleDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\PasswordBoxStyleDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\TextBoxStyleDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="Views\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Resource Include="Fonts\Titillium\Titillium-Black.otf" />
+    <Resource Include="Fonts\Titillium\Titillium-Bold.otf" />
+    <Resource Include="Fonts\Titillium\Titillium-BoldItalic.otf" />
+    <Resource Include="Fonts\Titillium\Titillium-BoldUpright.otf" />
+    <Resource Include="Fonts\Titillium\Titillium-Light.otf" />
+    <Resource Include="Fonts\Titillium\Titillium-LightItalic.otf" />
+    <Resource Include="Fonts\Titillium\Titillium-LightUpright 2.otf" />
+    <Resource Include="Fonts\Titillium\Titillium-LightUpright 3.otf" />
+    <Resource Include="Fonts\Titillium\Titillium-LightUpright 4.otf" />
+    <Resource Include="Fonts\Titillium\Titillium-LightUpright.otf" />
+    <Resource Include="Fonts\Titillium\Titillium-Regular.otf" />
+    <Resource Include="Fonts\Titillium\Titillium-RegularItalic.otf" />
+    <Resource Include="Fonts\Titillium\Titillium-RegularUpright 2.otf" />
+    <Resource Include="Fonts\Titillium\Titillium-RegularUpright 3.otf" />
+    <Resource Include="Fonts\Titillium\Titillium-RegularUpright.otf" />
+    <Resource Include="Fonts\Titillium\Titillium-Semibold.otf" />
+    <Resource Include="Fonts\Titillium\Titillium-SemiboldItalic.otf" />
+    <Resource Include="Fonts\Titillium\Titillium-SemiboldUpright 2.otf" />
+    <Resource Include="Fonts\Titillium\Titillium-SemiboldUpright 3.otf" />
+    <Resource Include="Fonts\Titillium\Titillium-SemiboldUpright 4.otf" />
+    <Resource Include="Fonts\Titillium\Titillium-SemiboldUpright 5.otf" />
+    <Resource Include="Fonts\Titillium\Titillium-SemiboldUpright 6.otf" />
+    <Resource Include="Fonts\Titillium\Titillium-SemiboldUpright 7.otf" />
+    <Resource Include="Fonts\Titillium\Titillium-SemiboldUpright.otf" />
+    <Resource Include="Fonts\Titillium\Titillium-Thin.otf" />
+    <Resource Include="Fonts\Titillium\Titillium-ThinItalic.otf" />
+    <Resource Include="Fonts\Titillium\Titillium-ThinUpright 2.otf" />
+    <Resource Include="Fonts\Titillium\Titillium-ThinUpright 3.otf" />
+    <Resource Include="Fonts\Titillium\Titillium-ThinUpright 4.otf" />
+    <Resource Include="Fonts\Titillium\Titillium-ThinUpright 5.otf" />
+    <Resource Include="Fonts\Titillium\Titillium-ThinUpright.otf" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Prism.Unity" Version="7.2.0.1422" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core\MSAEventAggregator.Core\MSAEventAggregator.Core.csproj">
+      <Project>{d24623f6-a4db-4789-a540-7afbe0db0dca}</Project>
+      <Name>MSAEventAggregator.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Modules\Camera\Camera.csproj">
+      <Project>{a6ee72df-2886-4393-9fef-819fc5ec79cb}</Project>
+      <Name>Camera</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Modules\HamburgerMenu\HamburgerMenu.csproj">
+      <Project>{97a81ccd-ca61-48b9-a104-d7477ae156a0}</Project>
+      <Name>HamburgerMenu</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Modules\Localization\Localization.csproj">
+      <Project>{60a8649a-bca1-488c-816c-a902f1de4b18}</Project>
+      <Name>Localization</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Modules\Localize\Localize.csproj">
+      <Project>{fbda817d-15c6-4ee4-8ac9-35cfb217ce2a}</Project>
+      <Name>Localize</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Modules\Login\Login.csproj">
+      <Project>{bd29fa18-f927-46cb-a153-f22d68287829}</Project>
+      <Name>Login</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Modules\Map\Map.csproj">
+      <Project>{20d2ff2b-b853-4a30-ae88-82d7d603a925}</Project>
+      <Name>Map</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Modules\MovementButton\MovementButton.csproj">
+      <Project>{ebe998e9-a323-421b-8c34-78d76844b0b6}</Project>
+      <Name>MovementButton</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Modules\ReturnHomeBtn\ReturnHomeBtn.csproj">
+      <Project>{3fa25f15-ac57-49b9-923b-7bde802031e5}</Project>
+      <Name>ReturnHomeBtn</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Modules\StatusBar\StatusBar.csproj">
+      <Project>{1354b534-5721-4b47-a3f7-c8d78e9ab20d}</Project>
+      <Name>StatusBar</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Services\MSAOperator.Services\MSAOperator.Services.csproj">
+      <Project>{24c3c060-924d-4ff5-b9db-0391ba9586b8}</Project>
+      <Name>MSAOperator.Services</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Libraries\ros-communication.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

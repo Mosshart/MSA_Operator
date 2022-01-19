@@ -11,11 +11,13 @@ namespace HamburgerMenu.ViewModels
     {
         public DelegateCommand ShowHamburgerMenuCommand { get; private set; }
         IRegionManager _regionManager;
+
         public HamburgerMenuBtnViewModel(IRegionManager regionManager)
         {
             _regionManager = regionManager;
             ShowHamburgerMenuCommand = new DelegateCommand(ShowHamburgerMenu);
         }
+
         private void ShowHamburgerMenu()
         {
             var parameters = new NavigationParameters();

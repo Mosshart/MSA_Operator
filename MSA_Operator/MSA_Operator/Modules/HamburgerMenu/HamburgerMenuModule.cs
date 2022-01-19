@@ -17,6 +17,7 @@ namespace HamburgerMenu
         { 
             containerRegistry.RegisterForNavigation<Views.HamburgerMenuBtn>();
             containerRegistry.RegisterForNavigation<Views.HamburgerMenu>();
+            containerRegistry.RegisterForNavigation<Views.LogoutPopup>();
         }  
     }
 }

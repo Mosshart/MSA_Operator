@@ -19,11 +19,14 @@ namespace HamburgerMenu.ViewModels
             _regionManager = regionManager;
             HideMenuCommand = new DelegateCommand(HideMenu);
             LogOffCommand = new DelegateCommand(LogOff);
-            ExitCommand = new DelegateCommand(Exit);
+            ExitCommand = new DelegateCommand(Exit);//;.
         }
 
         private void LogOff()
         {
+            _regionManager.RequestNavigate("PopupRegion", "LogoutPopup");
+           // string test = "";
+           // _regionManager.Regions["PopupRegion"].ActiveViews.FirstOrDefault();
         }
         private void Exit()
         {

@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="HamburgerMenu.Views.LogoutPopup"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"             
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             Height="1026" Width="1600">
+    <Grid Background="Transparent">
+    
+            <Grid  Height="250" Width="650" Background="#ffff">
+            <Border CornerRadius="10"  Background="#FFFFFF" BorderThickness="1,1,1,1" BorderBrush="#FFFFFF">
+                <Border.Effect>
+                    <DropShadowEffect  Direction="270" BlurRadius="25" Opacity="0.2" Color="Black"/>
+                </Border.Effect>
+            </Border>
+                <Label 
+                Name="LogoutInfoLabel"
+                Content="Czy napewno chcesz się wylogować" 
+                Style="{StaticResource Label17}"
+                HorizontalAlignment="Center" 
+                Margin="100,50,100,0" VerticalAlignment="Top" 
+                />
+                <StackPanel Margin="0,125,0,0" Orientation="Horizontal">
+
+                    <Border x:Name="ButtonBorder"
+                        Height="75" Width="225"
+                        CornerRadius="24"
+                        BorderThickness="1,0,1,0"
+                        BorderBrush="#2B5CFB"
+                        Background= "#2B5CFB" 
+                        Margin="30,0,70,0">
+                        <Button Style="{StaticResource BlankButton}" Command="{Binding LogoutNoCommand}" CommandParameter="{Binding ElementName=Password_PB}">
+                            <Label Content="Nie"  Foreground="#FFFFFF" Style="{StaticResource Label17}"/>
+                        </Button>
+                    </Border>
+                    <Border x:Name="ButtonBorder2"
+                        Height="75" Width="225"
+                        CornerRadius="24"
+                        BorderThickness="1,0,1,0"
+                        BorderBrush="#2B5CFB"
+                        Background= "#2B5CFB" 
+                        Margin="70,0,30,0" >
+                    <Button Style="{StaticResource BlankButton}" Command="{Binding LogoutYesCommand}" CommandParameter="{Binding ElementName=Password_PB}">
+                            <Label Content="Tak"  Foreground="#FFFFFF" Style="{StaticResource Label17}"/>
+                        </Button>
+                    </Border>
+
+                </StackPanel>
+        </Grid>
+        
+    </Grid>
+</UserControl>

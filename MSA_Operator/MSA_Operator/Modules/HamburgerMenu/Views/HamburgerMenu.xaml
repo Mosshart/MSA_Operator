@@ -8,7 +8,7 @@
              >
     <Grid>
         <StackPanel Background="#ffff" VerticalAlignment="Center" HorizontalAlignment="Left" Width="320" Height="1024" Orientation="Vertical">
-            <Button Style="{StaticResource BlankButton}" Margin="0,0,0,0" Height="50">
+            <!--<Button Style="{StaticResource BlankButton}" Margin="0,0,0,0" Height="50">
                 <Label Style="{StaticResource Label17}"> Ulubione lokalizacje</Label>
             </Button>
             <Button Style="{StaticResource BlankButton}" Margin="0,0,0,0" Height="50">
@@ -22,15 +22,21 @@
             </Button>
             <Button Style="{StaticResource BlankButton}" Margin="0,0,0,0" Height="50">
                 <Label Style="{StaticResource Label17}">Dziennik tras</Label>
-            </Button>
+            </Button>-->
+            <!--<ContentControl prism:RegionManager.RegionName="LogoutButton"/>-->
             <Button Command="{Binding LogOffCommand}" Style="{StaticResource BlankButton}" Margin="0,0,0,0" Height="50">
                 <Label Style="{StaticResource Label17}">Wyloguj</Label>
             </Button>
+
             <Button Command="{Binding ExitCommand}" Style="{StaticResource BlankButton}" Margin="0,0,0,0" Height="50">
                 <Label Style="{StaticResource Label17}">Wyjdź</Label>
             </Button>
         </StackPanel>
 
         <Button Style="{StaticResource BlankButton}" Command="{Binding HideMenuCommand}" Width="1600" Height="1026" Margin="320,0,0,0" />
+        <!--<ContentControl Height="250" Width="650" prism:RegionManager.RegionName="LogoutButton"/>-->
+        <ContentControl 
+                        prism:RegionManager.RegionName="PopupRegion" Margin="320,10,10,10" 
+                        />
     </Grid>
 </UserControl>

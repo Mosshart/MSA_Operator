@@ -36,6 +36,7 @@ namespace Map.ViewModels
         {
             _regionManager.RequestNavigate("MainRegion", "Map");
             _ea.GetEvent<Events>().Publish("../Images/Control_Dark.png");
+            _ea.GetEvent<CameraWindowEvent>().Publish(false);
         }
 
       
@@ -45,12 +46,12 @@ namespace Map.ViewModels
             get { return _mapDetails; }
             set { SetProperty(ref _mapDetails, value); }
         }
-     /*   #region Map 
+        #region Map 
         private MapMode _mode = new RoadMode();//new AerialMode(true);
         public MapMode Mode
         {
             get { return _mode; }
-            set { SetProperty(ref _mode, value); }
+            private set { SetProperty(ref _mode, value); }
         }
 
         private double _zoomLevel = 24.0;
@@ -67,7 +68,7 @@ namespace Map.ViewModels
             set { SetProperty(ref _location, value); }
         }
 
-        private AnimationLevel _animationLevel = AnimationLevel.None;
+    /*    private AnimationLevel _animationLevel = AnimationLevel.None;
         public AnimationLevel AnimationLevel
         {
             get { return _animationLevel; }
@@ -82,8 +83,8 @@ namespace Map.ViewModels
         {
             get { return _credentials; }
             set { SetProperty(ref _credentials, value); }
-        }
+        }*/
         #endregion
-    */
+    
         }
 }

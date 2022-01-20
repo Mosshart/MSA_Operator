@@ -58,7 +58,6 @@ namespace Map.Core
             }
             temp = watcher.Position.Location.ToString();
             Console.WriteLine("TEST: {0} \r\n Zmian: {1}", temp, coutnerTemp);
-
         }
 
     }

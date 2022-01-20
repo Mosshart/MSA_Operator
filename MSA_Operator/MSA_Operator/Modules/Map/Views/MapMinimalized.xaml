@@ -14,7 +14,22 @@
             ZoomLevel="{Binding ZoomLevel, Mode=TwoWay }" 
             Center="{Binding Location}"
             x:Name="MainMapMin" Margin="4">
-
+            <Canvas Name="Operator" m:MapLayer.Position="{Binding MapDetails.OperatorLocation}"
+                    m:MapLayer.PositionOrigin="BottomCenter" Width="30" Height="30">
+                <Image Source="../Images/Icon_Operator_home.png"/>
+            </Canvas>
+            <!--<Canvas Name="MidPin" m:MapLayer.Position="{Binding MapDetails.MidPinLocation}"
+                    m:MapLayer.PositionOrigin="BottomCenter" Width="30" Height="30">
+                <Image Source="../Images/Icon_Destination.png"/>
+            </Canvas>-->
+            <Canvas Name="Robot" m:MapLayer.Position="{Binding MapDetails.RobotLocation}"
+                    m:MapLayer.PositionOrigin="BottomCenter" Width="30" Height="56" RenderTransformOrigin="0.5,0.7321">
+                <Image Margin="0,15,0,0" Source="../Images/Icon_Location_direction.png" RenderTransformOrigin=".5,.732142857">
+                    <Image.RenderTransform>
+                        <RotateTransform Angle="{Binding MapDetails.RobotOrientation}"/>
+                    </Image.RenderTransform>
+                </Image>
+            </Canvas>
         </m:Map>
         <Border Name="MapBorder"  CornerRadius="10" Background="Transparent" BorderBrush="#FFFFFF" BorderThickness="4"/>
         <Button 

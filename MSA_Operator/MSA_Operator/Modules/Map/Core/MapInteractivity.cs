@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -58,7 +59,8 @@ namespace Map.Core
 
         private static void OnDrawRouteOnMapChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
         {
-            Microsoft.Maps.MapControl.WPF.Map map = (Microsoft.Maps.MapControl.WPF.Map)o;
+          /*  if (map == null)
+                map = (Microsoft.Maps.MapControl.WPF.Map)o;
             LocationCollection loc = (e.NewValue as LocationCollection);
 
             UIElementCollection a = map.Children;
@@ -75,10 +77,10 @@ namespace Map.Core
             {
                 Locations = loc,
                 Stroke = new SolidColorBrush(Colors.Blue),
-                StrokeThickness = 5
+                StrokeThickness = 2
             };
 
-            map.Children.Add(routeLine);                
+            map.Children.Add(routeLine);      */        
         }
 
         #endregion
@@ -86,56 +88,48 @@ namespace Map.Core
         #region AddPinInCenter
         public static readonly DependencyProperty AddPinInCenterProperty = DependencyProperty.RegisterAttached(
              "AddPinInCenterChanged",
-             typeof(bool),
+             typeof(int),
              typeof(MapInteractivity),
-             new UIPropertyMetadata(true, new PropertyChangedCallback(OnAddPinInCenterChanged)));
+             new UIPropertyMetadata(0, new PropertyChangedCallback(OnAddPinInCenterChanged)));
 
-        public static void SetAddPinInCenterChanged(DependencyObject target, bool value)
+        public static void SetAddPinInCenterChanged(DependencyObject target, int value)
         {
             target.SetValue(AddPinInCenterProperty, value);
         }
-
+        private static  Microsoft.Maps.MapControl.WPF.Map map;
         private static void OnAddPinInCenterChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
         {
-            Microsoft.Maps.MapControl.WPF.Map map = (Microsoft.Maps.MapControl.WPF.Map)o;
+            if(map == null)
+                map = (Microsoft.Maps.MapControl.WPF.Map)o;
             Location loc = (e.NewValue as Location);
-            Point centerPoint = new Point((map.ActualWidth / 2), (map.ActualHeight / 2));
+            Point centerPoint = new Point((map.ActualWidth / 2), ((map.ActualHeight / 2) + 96));
+
             Location pinLocation = map.ViewportPointToLocation(centerPoint);
 
-
-            Canvas midPin = new Canvas();
-            Image midPinImage = new Image();
-            midPinImage.Source = new BitmapImage(new Uri(@"/Images/Icon_Destination.png", UriKind.Relative));
-            midPin.Children.Add(midPinImage);
-            midPin.Width = 30;
-            midPin.Height = 30;
-        
-
-
-            //MapLayer xx = new MapLayer();
-
-            // Image pin = new Image();
-
-            // pin.Source = new BitmapImage(new Uri(@"/Images/Icon_Destination.png", UriKind.Relative));
-            //xx.AddChild(pin, loc);
-            // Pushpin x = (Pushpin)pin;
             Pushpin pin = new Pushpin();
+         //   pin.s
+            ControlTemplate template = pin.Template;
+           // template.I
+            pin.MouseRightButtonUp += DeletePushpin;
             pin.Location = pinLocation;
-
-          
-           // string template = "<ControlTemplate><Image Source='../Images/Icon_Destination.png'/></ControlTemplate>";
-           // pin.Template = (ControlTemplate)XamlReader.Parse(template);
-            // ControlTemplate template = new ControlTemplate(typeof(Canvas));
-            // template.
-            // pin.Template = midPin;
-            // Adds the pushpin to the map.
-            // var childrens = map.Children;
             map.Children.Add(pin);
+
+        }
+
+
+        #endregion
+        #region DeleteClickedPin
+        private static void DeletePushpin(object sender, MouseButtonEventArgs e)
+        {
+            Pushpin pushPinTodelete = (sender as Pushpin);
+            map.Children.Remove(pushPinTodelete);
+            //MapLayer a = (Microsoft.Maps.MapControl.WPF.MapLayer)(pushPinTodelete.Parent);
+            //a.Children.Remove(pushPinTodelete);
+            
+           // Microsoft.Maps.MapControl.WPF.Map map = (Microsoft.Maps.MapControl.WPF.Map) a.Parent;
         }
         #endregion
-
         /*
-
           #region xa
           public static readonly DependencyProperty AddPinInCenterProperty = DependencyProperty.RegisterAttached(
               "AddPinInCenter",
@@ -152,9 +146,7 @@ namespace Map.Core
           {
               Microsoft.Maps.MapControl.WPF.Map map = (Microsoft.Maps.MapControl.WPF.Map)o;
               LocationCollection loc = (e.NewValue as LocationCollection);
-
           }
-
           #endregion
         */
     }

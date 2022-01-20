@@ -13,19 +13,23 @@ using Microsoft.Maps.MapControl.WPF.Core;
 using MSAEventAggregator.Core;
 using Prism.Events;
 using Prism.Regions;
-using Map = Microsoft.Maps.MapControl.WPF.Map;
+//using Map = Microsoft.Maps.MapControl.WPF.Map;
 using System.Windows.Controls;
 using System.Device.Location;
 using System.Windows;
 using MSAOperator.Services;
-
+using System.Windows.Media.Imaging;
+using Microsoft.Maps.MapControl.WPF;
+using System.Windows.Input;
+using System.Windows.Media;
 namespace Map.ViewModels
 {
     public class MapViewModel : BindableBase
     {
         public DelegateCommand ChangeMapLayer { get; private set; }
+        public DelegateCommand StartRouteCommand { get; private set; }
        // public DelegateCommand CreatePinOnMap;
-        public DelegateCommand test { get; private set; }
+        public DelegateCommand<object> AddPinButtonCommand { get; private set; }
         public DelegateCommand<Location> SetViewCommand;
         private readonly IRegionManager _regionManager;
         private IEventAggregator _ea;
@@ -49,20 +53,184 @@ namespace Map.ViewModels
         public MapViewModel(IRegionManager regionManager,IEventAggregator ea, GeoLocalizationService GeoLoc)
         {
             this.GeoLoc = GeoLoc;
-            MapDetails = new MapDetails();
-            MapDetails.OperatorLocation = new Location(GeoLoc.Latitude, GeoLoc.Latitude);
+            MapDetails = new MapDetails(ea);
+           // MapDetails.OperatorLocation = new Location(GeoLoc.Latitude, GeoLoc.Latitude);
             _regionManager = regionManager;
             //ChangeMapLayer = new DelegateCommand(OnExecuteChangeMapLayerCommand).ObservesProperty(() => CanChangeLayer);
             ChangeMapLayer = new DelegateCommand(OnExecuteChangeMapLayerCommand).ObservesProperty(() => CanChangeLayer);
-          //  _localization = localization;
-            _ea = ea;
+            StartRouteCommand = new DelegateCommand(OnExecuteStartRouteCommand).ObservesCanExecute(() => CanCliCkSetRouteLayer);
+            AddPinButtonCommand = new DelegateCommand<object>(AddPinButtonPress);
+             //  _localization = localization;
+             _ea = ea;
+            _ea.GetEvent<LocalizationFindEvent>().Subscribe(HideShowForLocalization);
             _ea.GetEvent<LocalizeEvent>().Subscribe(MessageReceived);
             _ea.GetEvent<AddPin>().Subscribe(AddPinReceived);
             SetViewCommand = new DelegateCommand<Location>(OnSetView);
         }
-        int statusCounter = 0;
-      
+
+        private void OnExecuteStartRouteCommand()
+        {
+            //Tutaj start drogi (wyslanie wiadomosci do robota)
+
+
+            _ea.GetEvent<CloseLocalizationDetails>().Publish();
+        }
+
+        private void AddPinButtonPress(object map)
+        {
+            //AddPin++;
+            
+            AddPinFunc(map);
+        }
+
+        private Microsoft.Maps.MapControl.WPF.Map map;
+        private void AddPinFunc(object o)
+        {
+            if (map == null)
+                map = (Microsoft.Maps.MapControl.WPF.Map)o;
+            //Location loc = (e.NewValue as Location);
+            Point centerPoint = new Point((map.ActualWidth / 2), ((map.ActualHeight / 2) + 96));
+
+            Location pinLocation = map.ViewportPointToLocation(centerPoint);
+
+            Pushpin pin = new Pushpin();
+            //   pin.s
+          //  ControlTemplate template = pin.Template;
+            // template.I
+            pin.MouseRightButtonUp += DeletePushpin;
+            pin.Location = pinLocation;
+            pins = map.Children;
+            map.Children.Add(pin);
+            getLocationsToRoute();
+
+        }
+        UIElementCollection pins; 
+        private void DeletePushpin(object sender, MouseButtonEventArgs e)
+        {
+            Pushpin pushPinTodelete = (sender as Pushpin);
+            map.Children.Remove(pushPinTodelete);
+            getLocationsToRoute();
+        }
        
+        private void getLocationsToRoute()
+        {
+            UIElementCollection pushpinsInMap = map.Children;
+            List<Location> locations = new List<Location>();
+            MapPolyline toRemove = null;
+            foreach (var x in pushpinsInMap)
+            {
+                Type test = x.GetType();
+                if (x.GetType() == typeof(Pushpin))
+                {
+                    Pushpin pin = x as Pushpin;
+                    Location loc = pin.Location;
+                    locations.Add(loc);
+                   // break;
+                }
+
+                if (x.GetType() == typeof(MapPolyline))
+                {
+                    toRemove = (MapPolyline)x;
+                   // break;
+                }
+            }
+            if(toRemove != null)
+                map.Children.Remove(toRemove);
+            if (locations.Count >= 1)
+            {
+                LocationCollection locCol = CreateRoute(locations);
+               // LocationCollection locCol = tempRoute();
+
+
+                MapPolyline routeLine = new MapPolyline()
+                {
+                    Locations = locCol,
+                    Stroke = new SolidColorBrush(Colors.Blue),
+                    StrokeThickness = 4
+                };
+                map.Children.Add(routeLine);
+                ButtonStartColor = (SolidColorBrush)new BrushConverter().ConvertFrom("#0FEFAB");
+                CanCliCkSetRouteLayer = true;
+            }
+            else
+            {
+                ButtonStartColor = (SolidColorBrush)new BrushConverter().ConvertFrom("#707070"); 
+                CanCliCkSetRouteLayer = false;
+            }
+            
+        }
+        private LocationCollection CreateRoute(List<Location> points)
+        {
+            LocationCollection locs = new LocationCollection();
+            locs.Add(_mapDetails.RobotLocation);
+            foreach(Location x in points)
+            {
+                locs.Add(x);
+            }
+            return locs;
+        }
+
+        int statusCounter = 0;
+        #region element visibility
+        private Visibility _cameraMinimizedVisibility = Visibility.Visible;
+        public Visibility CameraMinimizedVisibility
+        {
+            get => _cameraMinimizedVisibility;
+            set
+            {
+                SetProperty(ref _cameraMinimizedVisibility, value);
+            }
+        }
+        private Visibility _localizenBtnRegionVisibility = Visibility.Visible;
+        public Visibility LocalizenBtnRegionVisibility
+        {
+            get => _localizenBtnRegionVisibility;
+            set
+            {
+                SetProperty(ref _localizenBtnRegionVisibility, value);
+            }
+        }
+        private Visibility _midLinesVisibility = Visibility.Collapsed;
+        public Visibility MidLinesVisibility
+        {
+            get => _midLinesVisibility;
+            set
+            {
+                SetProperty(ref _midLinesVisibility, value);
+            }
+        }
+        private Visibility _addPinButtonVisibility = Visibility.Collapsed;
+        public Visibility AddPinButtonVisibility
+        {
+            get => _addPinButtonVisibility;
+            set
+            {
+                SetProperty(ref _addPinButtonVisibility, value);
+            }
+        }
+
+        private void HideShowForLocalization(bool isHidden)
+        {
+            Visibility status;
+            if (isHidden)
+            {
+                status = Visibility.Collapsed;
+                MidLinesVisibility = Visibility.Visible;
+                AddPinButtonVisibility = Visibility.Visible;
+            }
+            else
+            {
+                status = Visibility.Visible;
+                MidLinesVisibility = Visibility.Collapsed; 
+                AddPinButtonVisibility = Visibility.Collapsed;
+            }
+            //  MidLinesVisibility = status;
+            CameraMinimizedVisibility = status;
+           // LocalizenBtnRegionVisibility = status;           
+        }
+
+        #endregion
+
         private string _textLabelTest;
         public string TextLabelTest
         {
@@ -78,94 +246,24 @@ namespace Map.ViewModels
         {
             // bool toChange = IsSetView;
             IsSetView = loc;
-            IsSetView = new Location(0,0);
+            //IsSetView = new Location(0,0);
             if (x)
             {
-                SetRoute = tempRoute();
+               // SetRoute = tempRoute();
                 x = !x;
             }
             else
             {
-                SetRoute = tempRoute2();
+              //  SetRoute = tempRoute2();
                 x = !x;
             }
         }
-        #region todelete
-        private LocationCollection tempRoute()
-        {
-            LocationCollection locs = new LocationCollection();
-
-            Location p1 = new Location(54.318477, 20.312711);
-            Location p2 = new Location(53.053134, 20.598355);
-            Location p3 = new Location(54.179187, 30.189420);
-            Location p4 = new Location(58.133361, 28.475553);
-
-            Pushpin pin1 = new Pushpin();
-            Pushpin pin2 = new Pushpin();
-            Pushpin pin3 = new Pushpin();
-            Pushpin pin4 = new Pushpin();
-
-            pin1.Location = p1;
-            pin2.Location = p2;
-            pin3.Location = p3;
-            pin4.Location = p4;
-
-            locs.Add(p1);
-            locs.Add(p2);
-            locs.Add(p3);
-            locs.Add(p4);
-            /*  
-             *  54.318477, 20.312711   
-             *  53.053134, 20.598355
-             *  54.179187, 30.189420
-             *  58.133361, 28.475553
-            42.863397, -7.999191
-            37.913341, -5.845871
-            45.138959, 1.449051
-            47.535296, 7.513504
-            */
-            return locs;
-        }
-        private LocationCollection tempRoute2()
-        {
-            LocationCollection locs = new LocationCollection();
-
-            Location p1 = new Location(42.863397, -7.999191);
-            Location p2 = new Location(37.913341, -5.845871);
-            Location p3 = new Location(45.138959, 1.449051);
-            Location p4 = new Location(47.535296, 7.513504);
-
-            Pushpin pin1 = new Pushpin();
-            Pushpin pin2 = new Pushpin();
-            Pushpin pin3 = new Pushpin();
-            Pushpin pin4 = new Pushpin();
-
-            pin1.Location = p1;
-            pin2.Location = p2;
-            pin3.Location = p3;
-            pin4.Location = p4;
-
-            locs.Add(p1);
-            locs.Add(p2);
-            locs.Add(p3);
-            locs.Add(p4);
-            /*  
-             *  54.318477, 20.312711   
-             *  53.053134, 20.598355
-             *  54.179187, 30.189420
-             *  58.133361, 28.475553
-            50,324.56, 18,653868
-            50.324355, 18.652457
-            50.323739, 18.652747
-            50.323482, 18.653675
-            */
-            return locs;
-        }
-        #endregion
+     
 
         private Location _isSetView;
         private LocationCollection _setRoute;
         private bool _canChangeLayer = true;
+        private bool _canCliCkSetRouteLayer = false;
         
         public LocationCollection SetRoute
         {
@@ -175,8 +273,8 @@ namespace Map.ViewModels
                 SetProperty(ref _setRoute, value);
             }
         }
-        private bool _addPin;
-        public bool AddPin
+        private int _addPin = 0;
+        public int AddPin
         {
             get => _addPin;
             set
@@ -190,6 +288,14 @@ namespace Map.ViewModels
             set
             {
                 SetProperty(ref _canChangeLayer, value);
+            }
+        }
+        public bool CanCliCkSetRouteLayer
+        {
+            get => _canCliCkSetRouteLayer;
+            set
+            {
+                SetProperty(ref _canCliCkSetRouteLayer, value);
             }
         }
         public Location IsSetView
@@ -236,45 +342,24 @@ namespace Map.ViewModels
         }
         private void AddPinReceived(bool addPin)
         {
+
             // Location loc = MapControl.ViewportPointToLocation(xy);
-           
-            
-            AddPin = !AddPin;
-           // pin.Location = loc;
+
+           // AddPinButtonCommand();
+           // AddPin++;           // pin.Location = loc;
             // Adds the pushpin to the map.
             //MapControl.Children.Add(pin);
         }
-        #region drawing lines
-        /*  private void updateMapRoute(List<Location> locations)
-          {
+        
 
-          }
-          private void drawLine()
-          {
-              LocationCollection locs = new LocationCollection();
-
-              foreach (var pin in MapControl.Children)
-              {
-                  if (pin.GetType() == typeof(Pushpin))
-                      locs.Add((pin as Pushpin).Location);
-              }
-              MapPolyline routeLine = new MapPolyline()
-              {
-                  Locations = locs,
-                  Stroke = new SolidColorBrush(Colors.Blue),
-                  StrokeThickness = 5
-
-              };
-
-              MapControl.Children.Add(routeLine);
-          }
-          UIElementCollection 
-          private Pushpin createPoint(Location loc)
-          {
-              Pushpin pin = new Pushpin();
-              pin.Location = pinLocation;
-              return pin;
-          }*/
-        #endregion
+        private SolidColorBrush _buttonStartColor = (SolidColorBrush) new BrushConverter().ConvertFrom("#707070");//("#0FEFAB"
+        public SolidColorBrush ButtonStartColor
+        {
+            get => _buttonStartColor;
+            set
+            {
+                SetProperty(ref _buttonStartColor, value);
+            }
+        }
     }
 }

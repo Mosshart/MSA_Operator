@@ -25,31 +25,47 @@
     </UserControl.Triggers>
 
     <Grid>
-        <m:Map CredentialsProvider="AttsGkqIHCOIEA11KtQZDphl5bi8lppin64jeg-ZOOhiS4cdHA_EXJwHSbyZi4Xo"
+     
+        <m:Map  CredentialsProvider="AttsGkqIHCOIEA11KtQZDphl5bi8lppin64jeg-ZOOhiS4cdHA_EXJwHSbyZi4Xo"
                AnimationLevel="Full" 
                Mode="{Binding MapDetails.Mode}"
-               ZoomLevel="{Binding MapDetails.ZoomLevel}"
-               Center="{Binding MapDetails.Location}"
+               ZoomLevel="{Binding MapDetails.ZoomLevel, Mode=TwoWay}"
+               Center="{Binding MapDetails.Location, Mode=TwoWay}"
+               
                x:Name="MainMap" Margin="0,0,0,-55"
-               core:MapInteractivity.MapViewChange="{Binding IsSetView}"
+               core:MapInteractivity.MapViewChange="{Binding IsSetView, Mode=TwoWay}"
                core:MapInteractivity.MapRouteChange ="{Binding SetRoute}"
-               core:MapInteractivity.AddPinInCenterChanged="{Binding AddPin}">
+             
+               >
 
             <Canvas Name="Operator" m:MapLayer.Position="{Binding MapDetails.OperatorLocation}"
                     m:MapLayer.PositionOrigin="BottomCenter" Width="30" Height="30">
-                    <Image Source="../Images/Icon_Operator_home.png"/>
+                <Image Source="../Images/Icon_Operator_home.png"/>
             </Canvas>
             <!--<Canvas Name="MidPin" m:MapLayer.Position="{Binding MapDetails.MidPinLocation}"
                     m:MapLayer.PositionOrigin="BottomCenter" Width="30" Height="30">
                 <Image Source="../Images/Icon_Destination.png"/>
             </Canvas>-->
+            
             <Canvas Name="Robot" m:MapLayer.Position="{Binding MapDetails.RobotLocation}"
-                    m:MapLayer.PositionOrigin="BottomCenter" Width="30" Height="56">
-                <Image Source="../Images/Icon_Location_direction.png" RenderTransformOrigin=".5,.732142857">
+                    m:MapLayer.PositionOrigin="BottomCenter" Width="30" Height="56" RenderTransformOrigin="0.5,0.7321">
+                <Image Margin="0,15,0,0" Source="../Images/Icon_Location_direction.png" RenderTransformOrigin=".5,.732142857">
                     <Image.RenderTransform>
                         <RotateTransform Angle="{Binding MapDetails.RobotOrientation}"/>
                     </Image.RenderTransform>
                 </Image>
+            </Canvas>
+            <Canvas Visibility="{Binding MidLinesVisibility}">
+                <Line 
+                    X1="960" Y1="0"
+                    X2="960" Y2="1079"
+                Stroke="Black"
+                StrokeThickness="1"/>
+                <Line 
+                    X1="0" Y1="628"
+                    X2="1920" Y2="628"
+                Stroke="Black"
+                StrokeThickness="1"/>
             </Canvas>
 
             <!--<Line   X1="0" 
@@ -61,17 +77,53 @@
                     Y1="{Binding ElementName='MainMap', Path='ActualHeight'}" 
                     X2="{Binding ElementName='MainMap', Path='ActualWidth'}" 
                     Y2="0" Stroke="Black" StrokeThickness="3" />-->
-            <Image Height="30" Width="30" Style="{StaticResource ShadowImage}" Source="../Images/Icon_Destination.png"/>
+            <!--<Image Height="30" Width="30" Style="{StaticResource ShadowImage}" Source="../Images/Icon_Destination.png"/>-->
         </m:Map>
 
         <Button Style="{StaticResource BlankButton}" Margin="1840,380,16,580" 
                 Command="{Binding ChangeMapLayer}" IsEnabled="{Binding CanChangeLayer}">
             <Image Style="{StaticResource ShadowImage}" Source="../Images/Button_layers.png"/>
         </Button>
-        <ContentControl Margin="1286,16,30,668" prism:RegionManager.RegionName="CameraMinimized"/>
-        <ContentControl Margin="1840,853,16,107" prism:RegionManager.RegionName="LocalizenBtnRegion"/>
+        <ContentControl Visibility="{Binding CameraMinimizedVisibility}" Margin="1286,16,30,668" prism:RegionManager.RegionName="CameraMinimized"/>
+        <ContentControl Visibility="{Binding LocalizenBtnRegionVisibility}" Margin="1840,853,16,107" prism:RegionManager.RegionName="LocalizenBtnRegion"/>
         <!--<ContentControl Margin="30,864,1730,56" prism:RegionManager.RegionName="MovementButton"/>-->
         <!--<ContentControl Margin="1840,848,16,112" prism:RegionManager.RegionName="LocalizeBtn"/>-->
         <ContentControl Margin="0,0,0,0" prism:RegionManager.RegionName="LocalizeOverlay"/>
+
+
+        <StackPanel Visibility="{Binding AddPinButtonVisibility}"  Margin="1765,935,16,21" >
+            <Border x:Name="ButtonBorder"
+                            Height="56"
+                        CornerRadius="24"
+                        BorderThickness="1,0,1,0"
+                        BorderBrush="{Binding ButtonStartColor}"
+                        Background= "{Binding ButtonStartColor}" 
+                        Margin="0,0,0,0">
+                <Button Style="{StaticResource BlankButton}" 
+                        Command="{Binding StartRouteCommand}"
+                        CommandParameter="{Binding ElementName=MainMap}"
+                       >
+                    <Label Content="Rozpocznij"  Foreground="#050B46" Style="{StaticResource Label17}"/>
+                </Button>
+            </Border>
+
+        </StackPanel>
+        <StackPanel Visibility="{Binding AddPinButtonVisibility}"  Margin="890.5,935,890.5,21" >
+            <Border x:Name="Button2Border"
+                            Height="56"
+                        CornerRadius="24"
+                        BorderThickness="1,0,1,0"
+                        BorderBrush="#2B5CFB"
+                        Background= "#2B5CFB" 
+                        Margin="0,0,0,0">
+                <Button Style="{StaticResource BlankButton}" 
+                        Command="{Binding AddPinButtonCommand}"
+                        CommandParameter="{Binding ElementName=MainMap}"
+                       >
+                    <Label Content="Dodaj punkt"  Foreground="#ffff" Style="{StaticResource Label17}"/>
+                </Button>
+            </Border>
+
+        </StackPanel>
     </Grid>
 </UserControl>

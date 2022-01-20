@@ -21,8 +21,6 @@
             </i:EventTrigger>
         </i:Interaction.Triggers>
 
-
-
         <Image Source="../Images/Control_Dark.png"/>
         <Image Source="{Binding ButtonStyle}"/>
 
@@ -44,9 +42,9 @@
             </Grid.RenderTransform>
             <Ellipse Height="80" Width="80" Fill="#2B5CFB"/>
         </Grid>
-        <Label Content="{Binding LabelX}" HorizontalAlignment="Left" Margin="10,113,0,0" VerticalAlignment="Top" Width="50" Height="29"/>
-        <Label Content="{Binding LabelY}" HorizontalAlignment="Left" Margin="95,113,0,0" VerticalAlignment="Top" Width="55" Height="25"/>
-        <Label Content="{Binding LabelRed}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="140" Height="25"/>
+        <Label IsEnabled="false" Content="{Binding LabelX}" HorizontalAlignment="Left" Margin="10,113,0,0" VerticalAlignment="Top" Width="50" Height="29"/>
+        <Label IsEnabled="false" Content="{Binding LabelY}" HorizontalAlignment="Left" Margin="95,113,0,0" VerticalAlignment="Top" Width="55" Height="25"/>
+        <Label IsEnabled="false" Content="{Binding LabelRed}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="140" Height="25"/>
     </Grid>
 </UserControl>
 

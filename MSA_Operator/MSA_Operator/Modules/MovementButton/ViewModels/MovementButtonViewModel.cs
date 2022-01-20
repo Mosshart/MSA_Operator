@@ -31,8 +31,8 @@ namespace MovementButton.ViewModels
             //Communication with robot
             //node = new RosNode("10.2.1.91", 8878);
             //node = new RosNode("10.130.1.150", 8877);
-            twistPublisher = _node.node.CreatePublisher(MessageType.Twist, "cmd_vel", "");
-            _node.node.Start();
+            twistPublisher = RosNodeService.node.CreatePublisher(MessageType.Twist, "cmd_vel", "");
+            RosNodeService.node.Start();
             _timer.Interval = new TimeSpan(0, 0, 0, 0, 100);
             _timer.Tick += (sender, args) =>
             {
@@ -118,10 +118,10 @@ namespace MovementButton.ViewModels
 
         private double _panelX;
         private double _panelY;
-        #region do wywalenia 
+      /*  #region do wywalenia 
         private string _labelX;
         private string _labelY;
-        #endregion
+        #endregion*/
         private double _visualX = 0;
         private double _visualY = 0;
         public double PanelX
@@ -131,7 +131,7 @@ namespace MovementButton.ViewModels
             {
                 if (value.Equals(_panelX)) return;
                     SetProperty(ref _panelX, value);
-                    LabelX = "X " + value.ToString();
+                   // LabelX = "X " + value.ToString();
                     VisualX = value;
                     CalculateDotPosition();
                     //_panelX = value;
@@ -146,7 +146,7 @@ namespace MovementButton.ViewModels
                 if (value.Equals(_panelY)) return;
                     SetProperty(ref _panelY, value);
 
-                LabelY = "Y " + value.ToString();
+                //LabelY = "Y " + value.ToString();
                 VisualY = value;
                 //_panelY = value;
                 //OnPropertyChanged("PanelY");
@@ -222,7 +222,7 @@ namespace MovementButton.ViewModels
                    y = PanelY + (80 * Math.Cos(phi));*/
                 VisualDotX = x;
                 VisualDotY = y;
-                LabelRed = x.ToString("0.##") + "-||-" + y.ToString("0.##");
+             //   LabelRed = x.ToString("0.##") + "-||-" + y.ToString("0.##");
             }
             else
             {
@@ -237,12 +237,11 @@ namespace MovementButton.ViewModels
             get { return _visualDotY; }
             set
             {
-
                 if (IsClicked == false) return;
                 SetProperty(ref _visualDotY, value -80);
             }
         }
-
+        /*
         public string LabelX
         {
             get => _labelX;
@@ -268,6 +267,6 @@ namespace MovementButton.ViewModels
             {
                 SetProperty(ref _labelY, value);
             }
-        }
+        }*/
     }
 }

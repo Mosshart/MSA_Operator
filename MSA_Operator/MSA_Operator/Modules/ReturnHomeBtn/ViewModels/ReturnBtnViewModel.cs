@@ -23,6 +23,9 @@ namespace ReturnHomeBtn.ViewModels
 
         private void ReturnHomeBtn()
         {
+
+            //tutaj wyslanie do robota sciezki powrotu do operatora
+
            // _ea.GetEvent<AddPin>().Publish(true);
         }
     }

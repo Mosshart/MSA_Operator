@@ -199,20 +199,18 @@
                         <Image Name="btnImage2" Source="{Binding EyeIcon}"/>
                     </Button>
                 </Grid>
-
                 <!-- Login button-->
                 <StackPanel Margin="0,39,0,16">
                     <Border x:Name="ButtonBorder"
                             Height="48"
-                        CornerRadius="24"
-                        BorderThickness="1,0,1,0"
-                        BorderBrush="#2B5CFB"
-                        Background= "#2B5CFB" Margin="32,0,32,0">
+                            CornerRadius="24"
+                            BorderThickness="1,0,1,0"
+                            BorderBrush="#2B5CFB"
+                            Background= "#2B5CFB" Margin="32,0,32,0">
                         <Button Style="{StaticResource BlankButton}" Command="{Binding LoginInCommand}" CommandParameter="{Binding ElementName=Password_PB}">
                             <Label Content="ZALOGUJ"  Foreground="#FFFFFF" Style="{StaticResource Label17}"/>
                         </Button>
                     </Border>
-
                 </StackPanel>
             </StackPanel>
         </Grid>

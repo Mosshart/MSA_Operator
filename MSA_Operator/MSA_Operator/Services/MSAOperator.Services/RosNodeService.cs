@@ -9,6 +9,6 @@ namespace MSAOperator.Services
 {
     public class RosNodeService
     {
-        public RosNode node = new RosNode("10.2.30.181", 8878);
+        public readonly static RosNode node = new RosNode("10.2.3.19", 8878);
     }
 }

@@ -58,10 +58,6 @@ namespace MSAOperator.Services
 
         #endregion
 
-
-     
-
-
         public WLanInfoService()
         {
             _timer = new DispatcherTimer(DispatcherPriority.Render);

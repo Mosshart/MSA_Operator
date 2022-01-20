@@ -25,8 +25,22 @@ namespace Localization.ViewModels
         {
             _regionManager = regionManager;
             ReturnFromDetails = new DelegateCommand(OnReturnCommand);
-            AddCordinatesToListCommand = new DelegateCommand(OnAddCordinatesToList);
+          //  AddCordinatesToListCommand = new DelegateCommand(OnAddCordinatesToList);
+            AddCordinatesToListCommand = new DelegateCommand(AddPinToMap);
             _ea = ea;
+            _ea.GetEvent<CenterLocationChange>().Subscribe(GetMidLocalization);
+            _ea.GetEvent<CloseLocalizationDetails>().Subscribe(OnReturnCommand);
+
+        }
+
+        private void GetMidLocalization(string obj)
+        {
+            DestinationText = obj;
+        }
+
+        private void AddPinToMap()
+        {
+            _ea.GetEvent<AddPin>().Publish(true);
         }
 
         public void OnAddCordinatesToList()
@@ -51,13 +65,17 @@ namespace Localization.ViewModels
 
         }
 
+
+
         private void OnReturnCommand()
         {
             var singleView = _regionManager.Regions["LocalizationRegion"].ActiveViews.FirstOrDefault();
             _regionManager.Regions["LocalizationRegion"].Deactivate(singleView);
-           /* bool a = _regionManager.Regions["LocalizationDetails"].NavigationService.Journal.CanGoBack;// Remove(singleView);
-            if(a == true)/
-                _regionManager.Regions["LocalizationDetails"].NavigationService.Journal.GoBack();*/
+
+            _ea.GetEvent<LocalizationFindEvent>().Publish(false);
+            /* bool a = _regionManager.Regions["LocalizationDetails"].NavigationService.Journal.CanGoBack;// Remove(singleView);
+             if(a == true)/
+                 _regionManager.Regions["LocalizationDetails"].NavigationService.Journal.GoBack();*/
         }
 
         public string CurrentLocalizationText

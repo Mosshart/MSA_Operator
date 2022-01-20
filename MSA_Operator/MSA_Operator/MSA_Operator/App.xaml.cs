@@ -27,9 +27,10 @@ namespace MSA_Operator
             //containerRegistry.RegisterSingleton<OperatorBatteryInfoService>();
 
 
-            containerRegistry.RegisterSingleton<RosNodeService>();
+            containerRegistry.Register<RosNodeService>();
             containerRegistry.RegisterSingleton<GeoLocalizationService>();
             containerRegistry.RegisterSingleton<WLanInfoService>();
+            containerRegistry.RegisterSingleton<CameraData>();
         }
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {

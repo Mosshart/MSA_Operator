@@ -9,18 +9,20 @@
     <Grid>
         <!--<ContentControl Margin="0,172,0,824" prism:RegionManager.RegionName="StatusBar" />-->
         <!--<ContentControl Margin="0,56,0,0" prism:RegionManager.RegionName="Localize"/>-->
-        <ContentControl Margin="0,56,0,0" prism:RegionManager.RegionName="MainRegion"/>
-        <ContentControl Margin="0,0,0,1024" prism:RegionManager.RegionName="StatusBar"/> 
-        <ContentControl Margin="1840,992,16,24" prism:RegionManager.RegionName="LocalizationListBtnRegion"/>
-        <ContentControl Margin="16,80,1840,936" prism:RegionManager.RegionName="HamburgerMenuBtnRegion"/>
         
+        <ContentControl Visibility="{Binding MainRegionVisibility}" Margin="0,56,0,0" prism:RegionManager.RegionName="MainRegion"/>
+        <ContentControl Visibility="{Binding StatusBarVisibility}" Margin="0,0,0,1024" prism:RegionManager.RegionName="StatusBar"/>
+        <ContentControl Visibility="{Binding LocalizationListBtnRegionVisibility}" Margin="1840,992,16,24" prism:RegionManager.RegionName="LocalizationListBtnRegion"/>
+        <ContentControl Visibility="{Binding HamburgerMenuBtnRegionVisibility}" Margin="16,80,1840,936" prism:RegionManager.RegionName="HamburgerMenuBtnRegion"/>
+
         <!--<ContentControl Margin="16,672,1840,344" prism:RegionManager.RegionName="ReturnHomeBtnRegion"/>-->
-        <ContentControl Margin="16,672,1840,344" prism:RegionManager.RegionName="ReturnHomeBtnRegion"/>
-        <ContentControl Margin="30,864,1730,56" prism:RegionManager.RegionName="MovementButtonRegion"/>
-        
-        <ContentControl Margin="0,56,0,0" prism:RegionManager.RegionName="LocalizationRegion"/>
-        <!---->
+        <ContentControl Visibility="{Binding ReturnHomeBtnRegionVisibility}" Margin="16,672,1840,344" prism:RegionManager.RegionName="ReturnHomeBtnRegion"/>
+        <ContentControl Visibility="{Binding MovementButtonRegionVisibility}" Margin="30,864,1730,56" prism:RegionManager.RegionName="MovementButtonRegion"/>
+
+        <ContentControl Visibility="{Binding LocalizationRegionVisibility}" 
+                        Margin="0,56,0,792" prism:RegionManager.RegionName="LocalizationRegion"/>
+     
         <!--<ContentControl Margin="-320,56,1913,0" prism:RegionManager.RegionName="HamburgerMenuRegion"/>-->
-        <ContentControl Margin="0,56,0,0" prism:RegionManager.RegionName="HamburgerMenuRegion"/>
+        <ContentControl Visibility="{Binding HamburgerMenuRegionVisibility}" Margin="0,56,0,0" prism:RegionManager.RegionName="HamburgerMenuRegion"/>
     </Grid>
 </Window>

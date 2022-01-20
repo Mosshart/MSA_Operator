@@ -17,7 +17,7 @@ namespace Localize.ViewModels
 
         public DelegateCommand LocalizeOperator { get; private set; }
         public DelegateCommand LocalizeRobot { get; private set; }
-
+        
         private void OnExecuteCloseCommand()
         {
             var singleView = _regionManager.Regions["LocalizeOverlay"].ActiveViews.FirstOrDefault();
@@ -42,7 +42,6 @@ namespace Localize.ViewModels
         }
         private void OnRobotLocalizeCommand()
         {
-
             _ea.GetEvent<LocalizeEvent>().Publish(true);
             OnExecuteCloseCommand();
         }
@@ -72,7 +71,6 @@ namespace Localize.ViewModels
             get => _isAnimationRunning;
             set { SetProperty(ref _isAnimationRunning, value); }
         }
-
     }
 }
  

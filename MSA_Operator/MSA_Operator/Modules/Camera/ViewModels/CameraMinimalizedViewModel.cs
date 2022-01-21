@@ -64,12 +64,11 @@ namespace Camera.ViewModels
         }
         private void ImageCallback(CompressedImage image)
         {
-            if (image.data == null || image.data.Length == 0)
-                return;
-
-            var bitmap = new BitmapImage();
+             if (image.data == null || image.data.Length == 0)
+                  return;
             using (var mem = new MemoryStream(image.data))
             {
+                var bitmap = new BitmapImage();
                 mem.Position = 0;
                 bitmap.BeginInit();
                 bitmap.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
@@ -77,12 +76,35 @@ namespace Camera.ViewModels
                 bitmap.UriSource = null;
                 bitmap.StreamSource = mem;
                 bitmap.EndInit();
+                bitmap.Freeze();
+              //  CameraImage.StreamSource.Dispose();
+                CameraImage = bitmap;
             }
-            bitmap.Freeze();
-            CameraImage = bitmap;
-           // FramesCount++;
-            CameraImage = bitmap;
+            
+          /*  using (MemoryStream mem = new MemoryStream(image.data))
+            {
+
+                mem.Position = 0;
+
+                //bitmap.StreamSource = mem;
+                //mem.Dispose();
+            }*/
+
+            /*  var bitmap = new BitmapImage(); 
+             bitmap.BeginInit();
+             bitmap.CacheOption = BitmapCacheOption.OnLoad;
+             bitmap.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+             bitmap.UriSource = null;
+            
+             //bitmap.Freeze();
+             bitmap.EndInit();*/
+            //bitmap.Freeze();
+            //CameraImage = bitmap;
+            // FramesCount++;
+            // CameraImage = bitmap;
         }
+
+
 
         private void changeBitmapImage(BitmapImage image)
         {
@@ -92,6 +114,7 @@ namespace Camera.ViewModels
         {
             _regionManager.RequestNavigate("MainRegion", "Camera");
             _ea.GetEvent<Events>().Publish("../Images/Control_Light.png");
+            _ea.GetEvent<CameraWindowEvent>().Publish(true);
         } 
 
         private BitmapImage _cameraImage;

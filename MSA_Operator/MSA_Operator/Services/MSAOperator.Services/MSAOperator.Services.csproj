@@ -53,7 +53,6 @@
     <Compile Include="BatteryService\IBatteryInfoService.cs" />
     <Compile Include="BatteryService\Operator\OperatorBatteryInfoService.cs" />
     <Compile Include="BatteryService\Robot\RobotBatteryInfoService.cs" />
-    <Compile Include="CameraData.cs" />
     <Compile Include="GeoLocalizationService.cs" />
     <Compile Include="RosNodeService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -4,7 +4,6 @@
              xmlns:prism="http://prismlibrary.com/"             
              prism:ViewModelLocator.AutoWireViewModel="True"
              Height="340" Width="604">
-
     <Grid>
         <Border Name="MinimizedCameraBorder" CornerRadius="10" Background="White" BorderBrush="#FFFFFF" BorderThickness="4"/>
         <Image Stretch="Fill" Source="{Binding CameraImage}" Margin="4">

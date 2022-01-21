@@ -29,7 +29,7 @@
         <Image Stretch="Fill" Source="{Binding CameraImage}"/> <!-- TUTAJ BEDZIE OBSLUGA MJPG-->
         <!--<Border Margin="1600,16,30,624" CornerRadius="10" Background="Transparent" BorderBrush="#FFFFFF" BorderThickness="4" >-->
 
-  <Image Stretch="Fill" Source="{Binding CameraImage}" Margin="4">
+        <Image Stretch="Fill" Source="{Binding CameraImage}" Margin="4">
             <Image.OpacityMask>  
                 <VisualBrush Visual="{Binding ElementName=MinimizedCameraBorder}"/>
             </Image.OpacityMask>

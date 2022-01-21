@@ -16,8 +16,10 @@ namespace Camera.ViewModels
     {
         Subscriber<CompressedImage> imageSubscriber;
         private RosNodeService _node;
+        
         public CameraViewModel(RosNodeService node)
         {
+          //  CameraImage = Cd.CameraImage;
             _node = node;
             imageSubscriber = _node.node.CreateSubscriber<CompressedImage>(MessageType.Image, "cam_front/compressed") as Subscriber<CompressedImage>;
             imageSubscriber.AddCallback(ImageCallback);
@@ -51,10 +53,9 @@ namespace Camera.ViewModels
         {
             if (image.data == null || image.data.Length == 0)
                 return;
-
-            var bitmap = new BitmapImage();
             using (var mem = new MemoryStream(image.data))
             {
+                var bitmap = new BitmapImage();
                 mem.Position = 0;
                 bitmap.BeginInit();
                 bitmap.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
@@ -62,11 +63,12 @@ namespace Camera.ViewModels
                 bitmap.UriSource = null;
                 bitmap.StreamSource = mem;
                 bitmap.EndInit();
+                bitmap.Freeze();
+                //  CameraImage.StreamSource.Dispose();
+                CameraImage = bitmap;
             }
-            bitmap.Freeze();
-            CameraImage = bitmap;
             // FramesCount++;
-            CameraImage = bitmap;
+            //    CameraImage = bitmap;
         }
         private void changeBitmapImage(BitmapImage image)
         {

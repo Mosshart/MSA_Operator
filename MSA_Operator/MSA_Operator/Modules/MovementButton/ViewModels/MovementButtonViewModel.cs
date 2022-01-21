@@ -31,8 +31,8 @@ namespace MovementButton.ViewModels
             //Communication with robot
             //node = new RosNode("10.2.1.91", 8878);
             //node = new RosNode("10.130.1.150", 8877);
-            twistPublisher = RosNodeService.node.CreatePublisher(MessageType.Twist, "cmd_vel", "");
-            RosNodeService.node.Start();
+            twistPublisher = _node.node.CreatePublisher(MessageType.Twist, "cmd_vel", "");
+            _node.node.Start();
             _timer.Interval = new TimeSpan(0, 0, 0, 0, 100);
             _timer.Tick += (sender, args) =>
             {

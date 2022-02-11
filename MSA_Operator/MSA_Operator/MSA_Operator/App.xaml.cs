@@ -7,6 +7,7 @@ using MSAOperator.Services;
 using System.Device.Location;
 using MSAOperator.Services.BatteryService.Operator;
 using MSAOperator.Services.BatteryService.Robot;
+using MSOperatorDBService;
 
 namespace MSA_Operator
 {
@@ -27,9 +28,11 @@ namespace MSA_Operator
             //containerRegistry.RegisterSingleton<OperatorBatteryInfoService>();
 
 
-            containerRegistry.Register<RosNodeService>();
+            containerRegistry.RegisterSingleton<RosNodeService>();
             containerRegistry.RegisterSingleton<GeoLocalizationService>();
             containerRegistry.RegisterSingleton<WLanInfoService>();
+            containerRegistry.Register<DatabaseModel>();
+
         }
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {

@@ -74,12 +74,12 @@
         </Style>
     </UserControl.Resources>
 
-    <Grid >
+    <Grid>
        
       
         <!--Animation-->
-        <ContentControl  Margin="0,0,0,0" prism:RegionManager.RegionName="LocalizationDetails">
-          
-        </ContentControl>
+        <ContentControl  Margin="0,0,0,0" prism:RegionManager.RegionName="LocalizationDetails"/>
+
+
     </Grid>
 </UserControl>

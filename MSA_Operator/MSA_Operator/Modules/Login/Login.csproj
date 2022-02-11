@@ -151,6 +151,15 @@
     <Resource Include="Images\Icon_visibility.png" />
     <Resource Include="Images\Icon_visibility_off.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\Services\MSAOperator.Services\MSAOperator.Services.csproj">
+      <Project>{24C3C060-924D-4FF5-B9DB-0391BA9586B8}</Project>
+      <Name>MSAOperator.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Services\MSOperatorDBService\MSOperatorDBService.csproj">
+      <Project>{0e7d3e7f-1f2d-4bb1-930f-fe8392661d6b}</Project>
+      <Name>MSOperatorDBService</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

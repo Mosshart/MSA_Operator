@@ -1,4 +1,5 @@
-﻿using Prism.Commands;
+﻿using MSOperatorDBService;
+using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
 using System.Windows;
@@ -20,9 +21,11 @@ namespace Login.ViewModels
         public DelegateCommand<object> UpdatePasswordTextOnClick { get; private set; }
 
         private readonly IRegionManager _regionManager;
-        public LoginWindowViewModel(IRegionManager regionManager)
+        private DatabaseModel _dbModel;
+        public LoginWindowViewModel(IRegionManager regionManager, DatabaseModel dbModel)
         {
             _regionManager = regionManager;
+            _dbModel = dbModel;
 
             ClearTextBox = new DelegateCommand<object>(ClearText);
             //  ShowTextCommand = new DelegateCommand<object>(ShowPasswordText);
@@ -103,30 +106,29 @@ namespace Login.ViewModels
                 a.Visibility = Visibility.Hidden;
         }*/
 
+      
+
+
         private void LogIn(object obj)
         {
+            // if (Username.ToLower() == "admin" && passwordBox.Password == "admin" || Username.ToLower() == "" && passwordBox.Password == "")
             PasswordBox passwordBox = obj as PasswordBox;
-            if (Username.ToLower() == "admin" && passwordBox.Password == "admin" || Username.ToLower() == "" && passwordBox.Password == "")
+            if (_dbModel.ValidateOperatorCredentials(Username, passwordBox.Password))
             {
+                //_regionManager.RequestNavigate("MainRegion", "Map");
+                // _regionManager.RequestNavigate("WindowRegion","VehicleSelectionWindow" );
                 ErrorVisibility = Visibility.Collapsed;
-                var parameters = new NavigationParameters();
-                //sprawdzenie uprawnien
-                if (true)
-                {
-                    //_regionManager.RequestNavigate("MainRegion", "Map");
-                   // _regionManager.RequestNavigate("WindowRegion","VehicleSelectionWindow" );
-                    _regionManager.RequestNavigate("WindowRegion", "VehicleSelectionWindow");
-                }
-                else
-                {
-                    _regionManager.RequestNavigate("WindowRegion", "VehicleSelectionWindow");
-                }
-            }else
-            {
-                ErrorVisibility = Visibility.Visible;
+                _regionManager.RequestNavigate("WindowRegion", "VehicleSelectionWindow");
             }
-        }
+            else
+            {
 
+                ErrorVisibility = Visibility.Visible;
+                // _regionManager.RequestNavigate("WindowRegion", "VehicleSelectionWindow");
+            }
+            Username = "";
+            passwordBox.Password = "";
+        }
         private void ClearText(object Visibility)
         {
             Visibility vis =(Visibility) Visibility;

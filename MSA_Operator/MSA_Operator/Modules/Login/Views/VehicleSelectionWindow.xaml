@@ -19,32 +19,8 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Margin="0,46,0,48" Content="Wybierz pojazd" Style="{StaticResource Label24}" />
-                
-                <!--<ListBox >
-                    -->
-                <!--<ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Border>
-                                <StackPanel Orientation="Horizontal" Background="Transparent" >
-                                    <StackPanel.Resources>
-                                        <Style TargetType="{x:Type Label}">
-                                            <Setter Property="Margin" Value="0,10,0,10"/>
-                                        </Style>
-                                        <Style TargetType="{x:Type CheckBox}">
-                                            <Setter Property="Margin" Value="0,10,0,10"/>
-                                        </Style>
-                                    </StackPanel.Resources>
-                                    <CheckBox Width="30" Height="30"/>
-                                    <Label   Content="Dupa" Foreground="#050B46" FontFamily="Titillium Web" FontSize="17"/>
-                                </StackPanel>
-                            </Border>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>-->
-                <!--
-                    <ListBoxItem Height="25"/>
-                    <ListBoxItem Height="25"/>
-                    <ListBoxItem Height="25"/>  
-                </ListBox>-->
+                <DockPanel>
+                <ScrollViewer DockPanel.Dock="Top" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                 <ListBox
                     x:Name="_vehicleList"
                     ItemsSource="{Binding Vehicles}"
@@ -63,7 +39,7 @@
                                     Margin="32,9,32,9">
 
                                 <CheckBox x:Name="_selectedCheckbox" Style="{StaticResource RoundedCheckbox}" 
-                                                    IsChecked="{Binding IsChecked}"/>
+                                                    IsChecked="{Binding IsChecked,Mode=TwoWay}"/>
 
 
                                 <Label Margin="28,0,0,0" Style="{StaticResource Label17}" 
@@ -78,7 +54,8 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-
+                </ScrollViewer>
+                </DockPanel>
                 <StackPanel Orientation="Horizontal">
                     <Button Style="{StaticResource BlankButton}" Margin="32,0,0,0" Height="30" Width="30" Command="{Binding NavigateToAddVehicleCommand}" >
                         <Image Source="../Images/AddVehicle.png"/>
@@ -92,7 +69,8 @@
                             CornerRadius="24"
                             BorderThickness="1,0,1,0"
                             BorderBrush="#2B5CFB"
-                            Background= "#2B5CFB" Margin="32,0,32,0">
+                            Background= "{Binding ButtonloginColor}" 
+                            Margin="32,0,32,0">
                         <Button Style="{StaticResource BlankButton}" Command="{Binding SelectVehicleCommand}">
                             <Label Content="WYBIERZ"  Foreground="#FFFFFF" Style="{StaticResource Label17}"/>
                         </Button>

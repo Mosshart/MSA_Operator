@@ -5,6 +5,7 @@ using Prism.Regions;
 using System;
 using System.Runtime.InteropServices;
 using System.Net;
+using MSOperatorDBService;
 
 namespace Login.ViewModels
 {
@@ -14,13 +15,15 @@ namespace Login.ViewModels
         IRegionManager _regionManager;
         private string _name;
         private string _ipAddress;
+        private DatabaseModel _db;
 
         public DelegateCommand CancelButtonCommand { get; private set; }
         public DelegateCommand AddButtonCommand { get; private set; }
 
-        public AddVehicleWindowViewModel(IRegionManager regionManager)
+        public AddVehicleWindowViewModel(IRegionManager regionManager, DatabaseModel dbModel)
         {
             _regionManager = regionManager;
+            _db = dbModel;
             CancelButtonCommand = new DelegateCommand(CancelButton);
             AddButtonCommand = new DelegateCommand(AddButton);
         }
@@ -29,6 +32,7 @@ namespace Login.ViewModels
         {
             var parameters = new NavigationParameters();
             parameters.Add("IsAnimation", true);
+            parameters.Add("NewVehAdded", true);
             _regionManager.RequestNavigate("WindowRegion", "VehicleSelectionWindow", parameters);
         }
 
@@ -36,12 +40,18 @@ namespace Login.ViewModels
         {
             var parameters = new NavigationParameters();
             parameters.Add("IsAnimation", false);
-
+            parameters.Add("NewVehAdded", false);
             IPAddress ip;
             bool isIpValid = IPAddress.TryParse(IpAddress, out ip);
+          
             if (isIpValid)
             {
-                parameters.Add("VehicleEntity", new VehicleEntity() { Name = this.Name, IPAddress = this.IpAddress});
+                Robots r = new Robots();
+                r.IPAddress = this.IpAddress.ToString();
+                r.Name = this.Name; 
+                //_db.AddRobotToDB(r);
+                parameters.Add("VehicleEntity",r);
+               
                 _regionManager.RequestNavigate("WindowRegion", "VehicleSelectionWindow", parameters);
             }
         }

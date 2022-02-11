@@ -141,7 +141,6 @@ namespace Map.ViewModels
                 LocationCollection locCol = CreateRoute(locations);
                // LocationCollection locCol = tempRoute();
 
-
                 MapPolyline routeLine = new MapPolyline()
                 {
                     Locations = locCol,
@@ -154,7 +153,7 @@ namespace Map.ViewModels
             }
             else
             {
-                ButtonStartColor = (SolidColorBrush)new BrushConverter().ConvertFrom("#707070"); 
+                ButtonStartColor = (SolidColorBrush)new BrushConverter().ConvertFrom("#707070");
                 CanCliCkSetRouteLayer = false;
             }
             

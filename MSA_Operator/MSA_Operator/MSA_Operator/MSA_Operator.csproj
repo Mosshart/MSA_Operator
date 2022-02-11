@@ -156,12 +156,16 @@
     <Resource Include="Fonts\Titillium\Titillium-ThinUpright 4.otf" />
     <Resource Include="Fonts\Titillium\Titillium-ThinUpright 5.otf" />
     <Resource Include="Fonts\Titillium\Titillium-ThinUpright.otf" />
+    <None Include="App.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="EntityFramework">
+      <Version>6.4.4</Version>
+    </PackageReference>
     <PackageReference Include="Prism.Unity" Version="7.2.0.1422" />
   </ItemGroup>
   <ItemGroup>
@@ -208,6 +212,10 @@
     <ProjectReference Include="..\Services\MSAOperator.Services\MSAOperator.Services.csproj">
       <Project>{24c3c060-924d-4ff5-b9db-0391ba9586b8}</Project>
       <Name>MSAOperator.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Services\MSOperatorDBService\MSOperatorDBService.csproj">
+      <Project>{0e7d3e7f-1f2d-4bb1-930f-fe8392661d6b}</Project>
+      <Name>MSOperatorDBService</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

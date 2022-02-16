@@ -1,17 +1,20 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 /// <summary>
 /// @author Filip Mystek
 /// </summary>
 namespace HamburgerMenu.ViewModels
 {
+    /// <summary>
+    /// view model class of user menu navigation button
+    /// </summary>
     public class HamburgerMenuBtnViewModel : BindableBase
     {
+        /// <summary>
+        /// show menu button click action
+        /// </summary>
         public DelegateCommand ShowHamburgerMenuCommand { get; private set; }
         IRegionManager _regionManager;
 

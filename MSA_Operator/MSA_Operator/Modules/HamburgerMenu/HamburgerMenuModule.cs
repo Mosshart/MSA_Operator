@@ -10,7 +10,6 @@ namespace HamburgerMenu
         public void OnInitialized(IContainerProvider containerProvider)
         {
             var regionManager = containerProvider.Resolve<IRegionManager>();
-            //regionManager.RegisterViewWithRegion("HamburgerMenuBtn", typeof(Views.HamburgerMenuBtn));
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)

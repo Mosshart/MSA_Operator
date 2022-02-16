@@ -10,9 +10,18 @@ using System.Linq;
 /// </summary>
 namespace HamburgerMenu.ViewModels
 {
+    /// <summary>
+    /// view model class of logout popup 
+    /// </summary>
     public class LogoutPopupViewModel : BindableBase, INavigationAware
     {
+        /// <summary>
+        /// logout confirmation button click action
+        /// </summary>
         public DelegateCommand LogoutYesCommand { get; private set; }
+        /// <summary>
+        /// logout decline button click action
+        /// </summary>
         public DelegateCommand LogoutNoCommand { get; private set; }
         IRegionManager _regionManager;
         public LogoutPopupViewModel(IRegionManager regionManager)
@@ -77,6 +86,7 @@ namespace HamburgerMenu.ViewModels
             }
         }
 
+        #region interface implementation
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
             return;
@@ -92,5 +102,6 @@ namespace HamburgerMenu.ViewModels
         {
             throw new NotImplementedException();
         }
+        #endregion
     }
 }

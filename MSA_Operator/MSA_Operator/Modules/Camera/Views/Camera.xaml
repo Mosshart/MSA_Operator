@@ -25,9 +25,9 @@
         <Border>
            
         </Border>
-        <!--<Image Margin="0,0,0,0" Source="../Images/Cam_Preview.png">-->
+        
         <Image Stretch="Fill" Source="{Binding CameraImage}"/> <!-- TUTAJ BEDZIE OBSLUGA MJPG-->
-        <!--<Border Margin="1600,16,30,624" CornerRadius="10" Background="Transparent" BorderBrush="#FFFFFF" BorderThickness="4" >-->
+        
 
         <Image Stretch="Fill" Source="{Binding CameraImage}" Margin="4">
             <Image.OpacityMask>  
@@ -37,6 +37,6 @@
 
         <ContentControl   Margin="1604,20,34,628" prism:RegionManager.RegionName="MapMinimalized"/>
         <ContentControl Margin="30,864,1730,56" prism:RegionManager.RegionName="MovementButtonCamera"/>
-        <!--</Border>-->
+        
     </Grid>
 </UserControl>

@@ -1,8 +1,4 @@
-﻿using Prism.Commands;
-using Prism.Mvvm;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Prism.Mvvm;
 using Prism.Regions;
 using System.Windows.Media.Imaging;
 using RosCommunication;
@@ -15,6 +11,9 @@ using System.IO;
 /// </summary>
 namespace Camera.ViewModels
 {
+    /// <summary>
+    /// view model of main camera window
+    /// </summary>
     public class CameraViewModel : BindableBase, INavigationAware
     {
         Subscriber<CompressedImage> imageSubscriber;
@@ -22,12 +21,12 @@ namespace Camera.ViewModels
         
         public CameraViewModel(RosNodeService node)
         {
-          //  CameraImage = Cd.CameraImage;
             _node = node;
             imageSubscriber = _node.node.CreateSubscriber<CompressedImage>(MessageType.Image, "cam_front/compressed") as Subscriber<CompressedImage>;
             imageSubscriber.AddCallback(ImageCallback);
      
         }
+        #region iterface implementation
         public bool IsNavigationTarget(NavigationContext navigationContext)
         {
             return true;
@@ -42,6 +41,7 @@ namespace Camera.ViewModels
         {
             
         }
+        #endregion
         public CompressedImage ImageToByteArray(System.Drawing.Image imageIn)
         {
             using (var ms = new MemoryStream())
@@ -70,15 +70,13 @@ namespace Camera.ViewModels
                 //  CameraImage.StreamSource.Dispose();
                 CameraImage = bitmap;
             }
-            // FramesCount++;
-            //    CameraImage = bitmap;
         }
-        private void changeBitmapImage(BitmapImage image)
-        {
-            CameraImage = image;
-        }
+      
 
         private BitmapImage _cameraImage;
+        /// <summary>
+        /// Get/set camera image
+        /// </summary>
         public BitmapImage CameraImage
         {
             get => _cameraImage;

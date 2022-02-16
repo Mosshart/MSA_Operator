@@ -28,7 +28,13 @@ namespace Localization.ViewModels
 
         private readonly IRegionManager _regionManager;
         private readonly IEventAggregator _ea;
+        /// <summary>
+        /// Return button click action
+        /// </summary>
         public DelegateCommand<Location> LocationSelectedCommand { get; private set; }
+        /// <summary>
+        /// Return button click action
+        /// </summary>
         public DelegateCommand NavigateToFavoriteListCommand { get; private set; }
 
 

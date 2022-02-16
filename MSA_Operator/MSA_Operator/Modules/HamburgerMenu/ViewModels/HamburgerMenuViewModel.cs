@@ -10,10 +10,22 @@ using System.Linq;
 /// </summary>
 namespace HamburgerMenu.ViewModels
 {
+    /// <summary>
+    /// view model of user menu
+    /// </summary>
     public class HamburgerMenuViewModel : BindableBase, INavigationAware
     {
+        /// <summary>
+        /// hide menu button click action
+        /// </summary>
         public DelegateCommand HideMenuCommand { get; private set; }
+        /// <summary>
+        /// log off button click action
+        /// </summary>
         public DelegateCommand LogOffCommand { get; private set; }
+        /// <summary>
+        /// close application button click action
+        /// </summary>
         public DelegateCommand ExitCommand { get; private set; }
         
         IRegionManager _regionManager;
@@ -41,6 +53,7 @@ namespace HamburgerMenu.ViewModels
             _regionManager.Regions["HamburgerMenuRegion"].Remove(singleView);
         }
 
+        #region interface implementation
         public bool IsNavigationTarget(NavigationContext navigationContext)
         {
             return true;
@@ -54,5 +67,6 @@ namespace HamburgerMenu.ViewModels
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
         }
+        #endregion
     }
 }

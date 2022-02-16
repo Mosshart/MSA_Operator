@@ -10,7 +10,7 @@ using Prism.Mvvm;
 namespace ReturnHomeBtn.ViewModels
 {
     /// <summary>
-    /// View model of battery control 
+    /// View model of Return button control 
     /// </summary>
     public class ReturnBtnViewModel : BindableBase
     {

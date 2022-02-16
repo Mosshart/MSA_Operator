@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interactivity;
@@ -13,46 +8,63 @@ using System.Windows.Interactivity;
 /// </summary>
 namespace MovementButton.Behaviours
 {
+    /// <summary>
+    /// Represents mouse moving behaviour
+    /// </summary>
     class MouseBehaviour : Behavior<Panel>
     {
-        public static readonly DependencyProperty MouseYProperty = DependencyProperty.Register(
-            "MouseY", typeof(double), typeof(MouseBehaviour), new PropertyMetadata(default(double)));
-
-        public static readonly DependencyProperty MouseXProperty = DependencyProperty.Register(
-            "MouseX", typeof(double), typeof(MouseBehaviour), new PropertyMetadata(default(double)));
-
+        /// <summary>
+        /// Mouse value in Y axis
+        /// </summary>
         public double MouseY
         {
             get { return (double)GetValue(MouseYProperty); }
             set { SetValue(MouseYProperty, value); }
         }
 
+        /// <summary>
+        /// Mouse value in X axis
+        /// </summary>
         public double MouseX
         {
             get { return (double)GetValue(MouseXProperty); }
             set { SetValue(MouseXProperty, value); }
         }
-
-
-        public static readonly DependencyProperty MouseLeftButtonClickedProperty = DependencyProperty.Register(
-            "MouseLeftButtonClicked", typeof(bool), typeof(MouseBehaviour), new PropertyMetadata(default(bool)));
-
+        /// <summary>
+        /// Mouse left button down value 
+        /// </summary>
         public bool MouseLeftButtonClicked
         {
             get { return (bool)GetValue(MouseLeftButtonClickedProperty); }
             set { SetValue(MouseLeftButtonClickedProperty, value); }
         }
-
-        public static readonly DependencyProperty MouseLeftButtonReleasedProperty = DependencyProperty.Register(
-            "MouseLeftButtonReleased", typeof(bool), typeof(MouseBehaviour), new PropertyMetadata(default(bool)));
-
+        /// <summary>
+        /// Mouse left button up value 
+        /// </summary>
         public bool MouseLeftButtonReleased
         {
             get { return (bool)GetValue(MouseLeftButtonReleasedProperty); }
             set { SetValue(MouseLeftButtonReleasedProperty, value); }
         }
 
+        #region dependency property 
+        public static readonly DependencyProperty MouseYProperty = DependencyProperty.Register(
+            "MouseY", typeof(double), typeof(MouseBehaviour), new PropertyMetadata(default(double)));
 
+        public static readonly DependencyProperty MouseXProperty = DependencyProperty.Register(
+            "MouseX", typeof(double), typeof(MouseBehaviour), new PropertyMetadata(default(double)));
+
+       
+
+        public static readonly DependencyProperty MouseLeftButtonClickedProperty = DependencyProperty.Register(
+            "MouseLeftButtonClicked", typeof(bool), typeof(MouseBehaviour), new PropertyMetadata(default(bool)));
+
+       
+
+        public static readonly DependencyProperty MouseLeftButtonReleasedProperty = DependencyProperty.Register(
+            "MouseLeftButtonReleased", typeof(bool), typeof(MouseBehaviour), new PropertyMetadata(default(bool)));
+
+        #endregion
 
         protected override void OnAttached()
         {

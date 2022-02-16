@@ -1,10 +1,5 @@
-﻿using Prism.Commands;
-using Prism.Mvvm;
+﻿using Prism.Mvvm;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Windows.Input;
 using MSAEventAggregator.Core;
 using Prism.Events;
 using System.Windows.Threading;
@@ -17,23 +12,28 @@ using MSAOperator.Services;
 /// </summary>
 namespace MovementButton.ViewModels
 {
+    /// <summary>
+    /// View model of movement joystick button control 
+    /// </summary>
     public class MovementButtonViewModel : BindableBase
     {
-        IEventAggregator _ea;
+        private IEventAggregator _ea;
         private DispatcherTimer _timer;
-        private RosNode node;
-        Publisher twistPublisher;
-        RosNodeService _node;
+        private Publisher twistPublisher;
+        private RosNodeService _node;
+
+        /// <summary>
+        /// movement button constructor, starts thread to send movement data to robot
+        /// </summary>
+        /// <param name="ea"></param>
+        /// <param name="node"></param>
         public MovementButtonViewModel(IEventAggregator ea, RosNodeService node)
         {
             _node = node;
             _ea = ea;
             _ea.GetEvent<Events>().Subscribe(MessageReceived);
             _timer = new DispatcherTimer(DispatcherPriority.Render);
-
-            //Communication with robot
-            //node = new RosNode("10.2.1.91", 8878);
-            //node = new RosNode("10.130.1.150", 8877);
+           
             twistPublisher = _node.node.CreatePublisher(MessageType.Twist, "cmd_vel", "");
             _node.node.Start();
             _timer.Interval = new TimeSpan(0, 0, 0, 0, 100);
@@ -44,11 +44,12 @@ namespace MovementButton.ViewModels
             _timer.Start();
         }
 
-        Tuple<float, float> lastSentValues;
+        private Tuple<float, float> lastSentValues;
+
         private void UpdateTimer_Tick()
         {
-            float x = 0;// (float)_visualDotX;
-            float y = 0;// (float)_visualDotY;
+            float x = 0;
+            float y = 0;
 
             if(_visualDotX != 0 && _visualDotY != 0)
             {
@@ -64,13 +65,15 @@ namespace MovementButton.ViewModels
 
             twistPublisher.Publish(twist);
             
-           // System.Diagnostics.Trace.WriteLine("X: " + x + ", Y: " + y);
             lastSentValues = new Tuple<float, float>(x, y);
         }
 
 
         private bool _isClicked = false;
 
+        /// <summary>
+        /// Is movementbutton clicked
+        /// </summary>
         public bool IsClicked
         {
             get => _isClicked;
@@ -95,6 +98,9 @@ namespace MovementButton.ViewModels
         private string _buttonStyle = @"../Images/Control_Dark.png";
         private int _angle;
 
+        /// <summary>
+        /// Get/set button color style (image) as path string
+        /// </summary>
         public string ButtonStyle
         {
             get
@@ -109,7 +115,9 @@ namespace MovementButton.ViewModels
             }
         }
 
-
+        /// <summary>
+        /// get/set angle of central dot 
+        /// </summary>
         public int Angle
         {
             get => _angle;
@@ -121,12 +129,11 @@ namespace MovementButton.ViewModels
 
         private double _panelX;
         private double _panelY;
-      /*  #region do wywalenia 
-        private string _labelX;
-        private string _labelY;
-        #endregion*/
         private double _visualX = 0;
         private double _visualY = 0;
+        /// <summary>
+        /// Big dot position X
+        /// </summary>
         public double PanelX
         {
             get { return _panelX; }
@@ -134,13 +141,13 @@ namespace MovementButton.ViewModels
             {
                 if (value.Equals(_panelX)) return;
                     SetProperty(ref _panelX, value);
-                   // LabelX = "X " + value.ToString();
                     VisualX = value;
                     CalculateDotPosition();
-                    //_panelX = value;
-                    //  OnPropertyChanged("PanelX");
             }
         }
+        /// <summary>
+        /// Big dot position Y
+        /// </summary>
         public double PanelY
         {
             get { return _panelY; }
@@ -148,52 +155,16 @@ namespace MovementButton.ViewModels
             {
                 if (value.Equals(_panelY)) return;
                     SetProperty(ref _panelY, value);
-
-                //LabelY = "Y " + value.ToString();
                 VisualY = value;
-                //_panelY = value;
-                //OnPropertyChanged("PanelY");
             }
         }
         private double _visualDotX;
         private double _visualDotY;
 
-        public double VisualX
-        {
-            get { return _visualX; }
-            set
-            {
-                if (IsClicked == false) return;
-               
-                SetProperty(ref _visualX, value - 80);
-                //_panelX = value;
-                //  OnPropertyChanged("PanelX");
-            }
-        }
-        public double VisualY
-        {
-            get { return _visualY; }
-            set
-            {
-                if (IsClicked == false) return;
-                SetProperty(ref _visualY, value -80);
-                //_panelY = value;
-                //OnPropertyChanged("PanelY");
-            }
-        }
 
-
-        public double VisualDotX
-        {
-            get { return _visualDotX; }
-            set
-            {
-                if (IsClicked == false) return;
-                SetProperty(ref _visualDotX, value - 80);
-            }
-        }
+      
         /// <summary>
-        /// 
+        /// Calculates if grabbed visual dot is moved outside big circle, if yes returns true
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
@@ -204,8 +175,7 @@ namespace MovementButton.ViewModels
             return !(Math.Sqrt(Math.Pow((x - 80), 2) + Math.Pow((y - 80), 2)) < circleRadius);
         }
         /// <summary>
-        ///
-        /// 
+        /// Calculates central dot positin, if outside big circle block it on the edge.
         /// </summary>
         public void CalculateDotPosition()
         {
@@ -213,19 +183,13 @@ namespace MovementButton.ViewModels
             double x1 = 80, y1 = 80, //punkt 1
             x2 = PanelX, y2 = PanelY, // punkt 2 
             r = 80;
-
-            //if (x2 > 160 || x2 <0 || y2 >160 || y2 <0) {
             if(IsPointInsideCircle(x2,y2, r)){
                 double x, y;
                 double phi = Math.Atan2(y2 - y1, x2 - x1);
                 y = x1 + r * Math.Sin(phi);
                 x = y1 + r * Math.Cos(phi);
-
-                /*   x = PanelX + (80 * Math.Sin(phi));
-                   y = PanelY + (80 * Math.Cos(phi));*/
                 VisualDotX = x;
                 VisualDotY = y;
-             //   LabelRed = x.ToString("0.##") + "-||-" + y.ToString("0.##");
             }
             else
             {
@@ -234,7 +198,48 @@ namespace MovementButton.ViewModels
             }
             
         }
+        /// <summary>
+        /// sets X postion of visual dot
+        /// </summary>
+        public double VisualX
+        {
+            get { return _visualX; }
+            set
+            {
+                if (IsClicked == false) return;
 
+                SetProperty(ref _visualX, value - 80);
+
+            }
+        }
+        /// <summary>
+        /// sets Y postion of visual dot
+        /// </summary>
+        public double VisualY
+        {
+            get { return _visualY; }
+            set
+            {
+                if (IsClicked == false) return;
+                SetProperty(ref _visualY, value - 80);
+            }
+        }
+        /// <summary>
+        /// sets X position of visual dot (duplicated from VisualX as a temp value)
+        /// </summary>
+        public double VisualDotX
+        {
+            get { return _visualDotX; }
+            set
+            {
+                if (IsClicked == false) return;
+                SetProperty(ref _visualDotX, value - 80);
+            }
+        }
+
+        /// <summary>
+        /// sets Y position of visual dot duplicated from VisualY as a temp value)
+        /// </summary>
         public double VisualDotY
         {
             get { return _visualDotY; }
@@ -244,32 +249,6 @@ namespace MovementButton.ViewModels
                 SetProperty(ref _visualDotY, value -80);
             }
         }
-        /*
-        public string LabelX
-        {
-            get => _labelX;
-            set
-            {
-                SetProperty(ref _labelX, value);
-            }
-        }
-        
-        private string _labelRed;
-        public string LabelRed
-        {
-            get => _labelRed;
-            set
-            {
-                SetProperty(ref _labelRed, value);
-            }
-        }
-        public string LabelY
-        {
-            get => _labelY;
-            set
-            {
-                SetProperty(ref _labelY, value);
-            }
-        }*/
+     
     }
 }

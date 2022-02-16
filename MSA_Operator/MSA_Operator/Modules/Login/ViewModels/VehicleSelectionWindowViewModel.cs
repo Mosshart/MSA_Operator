@@ -29,9 +29,17 @@ namespace Login.ViewModels
             }
         }
 
-
+        /// <summary>
+        /// On selected vehicle change action
+        /// </summary>
         public DelegateCommand<VehicleEntity> SelectedVehicleChangeCommand { get; private set; }
+        /// <summary>
+        /// On add vehicle button click action
+        /// </summary>
         public DelegateCommand NavigateToAddVehicleCommand { get; private set; }
+        /// <summary>
+        /// On confim button click action
+        /// </summary>
         public DelegateCommand SelectVehicleCommand { get; private set; }
 
         private DatabaseModel _db;
@@ -64,8 +72,10 @@ namespace Login.ViewModels
             obj.IsChecked = true;
         }
 
-
         private SolidColorBrush _buttonLoginColor = (SolidColorBrush)new BrushConverter().ConvertFrom("#707070");
+        /// <summary>
+        /// Button login color
+        /// </summary>
         public SolidColorBrush ButtonloginColor
         {
             get => _buttonLoginColor;
@@ -104,8 +114,8 @@ namespace Login.ViewModels
             _regionManager.RequestNavigate("WindowRegion", "AddVehicleWindow", parameters);            
         }
 
-      
 
+        #region interface implementation
         public bool IsNavigationTarget(NavigationContext navigationContext)
         {
             return true;
@@ -115,7 +125,10 @@ namespace Login.ViewModels
         {
             return;
         }
-
+        /// <summary>
+        /// Occurs when navigated from other view.
+        /// </summary>
+        /// <param name="navigationContext"></param>
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
             if (Vehicles == null)
@@ -134,7 +147,7 @@ namespace Login.ViewModels
             return;
         }
 
-       
+        #endregion
         private void VehiclesFromDB()
         {
 

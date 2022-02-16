@@ -33,15 +33,24 @@ namespace Login.ViewModels
         /// </summary>
         public DelegateCommand<object> LoginInCommand { get; private set; }
         /// <summary>
-        /// Mouse acction leftmouse down action
+        /// Mouse acction on textbox -leftmouse down action
         /// </summary>
         public DelegateCommand<object> LeftButtonDownTBCommand { get; private set; }
         /// <summary>
-        /// Mouse acction leftmouse up action
+        /// Mouse action on textbox- leftmouse up action
         /// </summary>
         public DelegateCommand<object> LeftButtonUpTBCommand { get; private set; }
+        /// <summary>
+        /// Mouse acction on passwordbox - leftmouse down action
+        /// </summary>
         public DelegateCommand<object> LeftButtonDownPBCommand { get; private set; }
+        /// <summary>
+        /// Mouse acction on passwordbox - leftmouse up action
+        /// </summary>
         public DelegateCommand<object> LeftButtonUpPBCommand { get; private set; }
+        /// <summary>
+        /// Mouse acction on passwordbox - click down action
+        /// </summary>
         public DelegateCommand<object> UpdatePasswordTextOnClick { get; private set; }
 
         private readonly IRegionManager _regionManager;
@@ -122,6 +131,7 @@ namespace Login.ViewModels
                 passwordBox.Password = PasswordText;
         }
      
+      
         private void LogIn(object obj)
         {
             PasswordBox passwordBox = obj as PasswordBox;
@@ -147,7 +157,9 @@ namespace Login.ViewModels
         }       
         
         private Visibility _errorVisibility = Visibility.Collapsed;
-
+        /// <summary>
+        /// Wrong login error visibility
+        /// </summary>
         public Visibility ErrorVisibility
         {
             get => _errorVisibility;
@@ -158,6 +170,9 @@ namespace Login.ViewModels
         }
         private System.Windows.Visibility _labelUsernameVisibility = Visibility.Hidden;
 
+        /// <summary>
+        /// Label username visibility
+        /// </summary>
         public Visibility LabelUsernameVisibility
         {
             get => _labelUsernameVisibility;
@@ -166,13 +181,11 @@ namespace Login.ViewModels
                 SetProperty(ref _labelUsernameVisibility, value);
             }
         }
-        public Visibility SetVisible()
-        {
-            LabelUsernameVisibility = Visibility.Visible;
-            return  Visibility.Visible;
-        }
+    
         private string _username = "";
-
+        /// <summary>
+        /// Username text
+        /// </summary>
         public string Username
         {
             get => _username;
@@ -182,6 +195,9 @@ namespace Login.ViewModels
             }
         }
         private string _passwordText = "";
+        /// <summary>
+        /// Password text
+        /// </summary>
         public string PasswordText
         {
             get => _passwordText;

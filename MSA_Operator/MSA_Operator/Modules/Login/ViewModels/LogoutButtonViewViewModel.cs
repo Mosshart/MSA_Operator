@@ -9,6 +9,9 @@ namespace Login.ViewModels
 {
     public class LogoutButtonViewViewModel : BindableBase
     {
+        /// <summary>
+        /// clear textbox button click action
+        /// </summary>
         public DelegateCommand LogOffCommand { get; private set; }
         private readonly IRegionManager _regionManager;
 

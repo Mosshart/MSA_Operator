@@ -6,6 +6,9 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
+/// <summary>
+/// @author Filip Mystek
+/// </summary>
 namespace Localization.Business
 {
     public class Location : INotifyPropertyChanged

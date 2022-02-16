@@ -6,6 +6,9 @@ using System.Linq;
 using Prism.Events;
 using Prism.Regions;
 
+/// <summary>
+/// @author Filip Mystek
+/// </summary>
 namespace Localize.ViewModels
 {
     public class ShowOverlayViewModel : BindableBase

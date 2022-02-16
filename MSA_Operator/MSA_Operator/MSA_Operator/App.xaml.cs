@@ -23,11 +23,6 @@ namespace MSA_Operator
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            //containerRegistry.RegisterSingleton<OperatorBatteryInfoService>();
-            //containerRegistry.RegisterSingleton<OperatorBatteryInfoService>();
-            //containerRegistry.RegisterSingleton<OperatorBatteryInfoService>();
-
-
             containerRegistry.RegisterSingleton<RosNodeService>();
             containerRegistry.RegisterSingleton<GeoLocalizationService>();
             containerRegistry.RegisterSingleton<WLanInfoService>();
@@ -35,9 +30,7 @@ namespace MSA_Operator
 
         }
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
-        {
-            //status bar modules
-            //  moduleCatalog.AddModule<StatusBar.StatusBarModule>();
+        {          
             moduleCatalog.AddModule<StatusBar.StatusBarModule>();
             moduleCatalog.AddModule<MovementButton.MovementButtonModule>();
             moduleCatalog.AddModule<Map.MapModule>(); 
@@ -47,7 +40,6 @@ namespace MSA_Operator
             moduleCatalog.AddModule<HamburgerMenu.HamburgerMenuModule>();
             moduleCatalog.AddModule<ReturnHomeBtn.ReturnHomeBtnModule>();
             moduleCatalog.AddModule<Login.LoginModule>();
-            // moduleCatalog.AddModule<Battery.BatteryModule>();
         }
     }
 }

@@ -7,6 +7,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 
+/// <summary>
+/// @author Filip Mystek
+/// </summary>
 namespace Localization.ViewModels
 {
     public class FavoriteLocalizationListViewModel : BindableBase, INavigationAware

@@ -5,6 +5,9 @@ using Prism.Regions;
 using System.Windows;
 using System.Windows.Controls;
 
+/// <summary>
+/// @author Filip Mystek
+/// </summary>
 namespace Login.ViewModels
 {
     public class LoginWindowViewModel : BindableBase

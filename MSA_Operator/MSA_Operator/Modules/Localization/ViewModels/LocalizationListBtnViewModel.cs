@@ -8,6 +8,9 @@ using Prism.Regions;
 using Prism.Events;
 using MSAEventAggregator.Core;
 
+/// <summary>
+/// @author Filip Mystek
+/// </summary>
 namespace Localization.ViewModels
 {
     public class LocalizationListBtnViewModel : BindableBase

@@ -10,20 +10,28 @@ using MSAEventAggregator.Core;
 /// </summary>
 namespace MSA_Operator.ViewModels
 {
+    /// <summary>
+    /// Main window classs, first view created after start
+    /// </summary>
     public class MainWindowViewModel : BindableBase
     {
         IEventAggregator _ea;
         private string _title = "MSA Operator";
+        /// <summary>
+        /// Window tittle
+        /// </summary>
         public string Title
         {
             get { return _title; }
             set { SetProperty(ref _title, value); }
         }
 
-        private readonly IRegionManager _regionManager;
-        public MainWindowViewModel(IRegionManager regionManager, IEventAggregator ea)
-        {
-            _regionManager = regionManager; 
+        /// <summary>
+        /// main window constructor
+        /// </summary>
+        /// <param name="ea">event aggregator used to exchange events between modules</param>
+        public MainWindowViewModel(IEventAggregator ea)
+        {            
             _ea = ea;
             _ea.GetEvent<LocalizationFindEvent>().Subscribe(HideShowForLocalization);
             _ea.GetEvent<CameraWindowEvent>().Subscribe(HideShowForCameraView);
@@ -31,6 +39,9 @@ namespace MSA_Operator.ViewModels
 
         #region visibility
         private Visibility _mainRegionVisibility = Visibility.Visible;
+        /// <summary>
+        /// Is mainregion visivle
+        /// </summary>
         public Visibility MainRegionVisibility
         {
             get => _mainRegionVisibility;
@@ -41,6 +52,9 @@ namespace MSA_Operator.ViewModels
         }
 
         private Visibility _statusBarVisibility = Visibility.Visible;
+        /// <summary>
+        /// Is Statusbar visible
+        /// </summary>
         public Visibility StatusBarVisibility
         {
             get => _statusBarVisibility;
@@ -51,6 +65,9 @@ namespace MSA_Operator.ViewModels
         }
 
         private Visibility _returnHomeBtnRegionVisibility = Visibility.Visible;
+        /// <summary>
+        /// Is return home button visible
+        /// </summary>
         public Visibility ReturnHomeBtnRegionVisibility
         {
             get => _returnHomeBtnRegionVisibility;
@@ -61,6 +78,9 @@ namespace MSA_Operator.ViewModels
         }
 
         private Visibility _localizationListBtnRegionVisibility = Visibility.Visible;
+        /// <summary>
+        /// Is localization button visible
+        /// </summary>
         public Visibility LocalizationListBtnRegionVisibility
         {
             get => _localizationListBtnRegionVisibility;
@@ -71,6 +91,9 @@ namespace MSA_Operator.ViewModels
         }
 
         private Visibility _hamburgerMenuBtnRegionVisibility = Visibility.Visible;
+        /// <summary>
+        /// ishamburger meny button visible
+        /// </summary>
         public Visibility HamburgerMenuBtnRegionVisibility
         {
             get => _hamburgerMenuBtnRegionVisibility;
@@ -81,6 +104,9 @@ namespace MSA_Operator.ViewModels
         }
 
         private Visibility _movementButtonRegionVisibility = Visibility.Visible;
+        /// <summary>
+        /// is movement joystick visible
+        /// </summary>
         public Visibility MovementButtonRegionVisibility
         {
             get => _movementButtonRegionVisibility;
@@ -91,6 +117,9 @@ namespace MSA_Operator.ViewModels
         }
 
         private Visibility _localizationRegionVisibility = Visibility.Visible;
+        /// <summary>
+        /// Visibility for localization region
+        /// </summary>
         public Visibility LocalizationRegionVisibility
         {
             get => _localizationRegionVisibility;
@@ -101,6 +130,9 @@ namespace MSA_Operator.ViewModels
         }
 
         private Visibility _hamburgerMenuRegionVisibility = Visibility.Visible;
+        /// <summary>
+        /// Visibility for hamburger menu region
+        /// </summary>
         public Visibility HamburgerMenuRegionVisibility
         {
             get => _hamburgerMenuRegionVisibility;
@@ -111,6 +143,10 @@ namespace MSA_Operator.ViewModels
         }
         #endregion
 
+        /// <summary>
+        /// Hides/show icons after camera button is clicked
+        /// </summary>
+        /// <param name="isHidden">is hide option or unhide</param>
         private void HideShowForCameraView(bool isHidden)
         {
             if (isHidden)
@@ -127,9 +163,11 @@ namespace MSA_Operator.ViewModels
                 ReturnHomeBtnRegionVisibility = Visibility.Visible;
                 LocalizationListBtnRegionVisibility = Visibility.Visible;
             }
-           
-
         }
+        /// <summary>
+        /// Hides/show icons after localization button is clicked
+        /// </summary>
+        /// <param name="isHidden">is hide option or unhide</param>
         private void HideShowForLocalization(bool isHidden)
         {
             Visibility status;

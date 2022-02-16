@@ -7,6 +7,9 @@ using System.Net;
 using System.Runtime.CompilerServices;
 using System.ComponentModel;
 
+/// <summary>
+/// @author Filip Mystek
+/// </summary>
 namespace Login.Business
 {
     public class VehicleEntity : INotifyPropertyChanged

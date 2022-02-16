@@ -8,6 +8,9 @@ using MSAEventAggregator.Core;
 using Prism.Events;
 using Prism.Regions;
 
+/// <summary>
+/// @author Filip Mystek
+/// </summary>
 namespace Localize.ViewModels
 {
     public class MainOverlayViewModel : BindableBase, INavigationAware

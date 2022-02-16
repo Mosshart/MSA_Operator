@@ -7,6 +7,9 @@ using System.Runtime.InteropServices;
 using System.Net;
 using MSOperatorDBService;
 
+/// <summary>
+/// @author Filip Mystek
+/// </summary>
 namespace Login.ViewModels
 {
     public class AddVehicleWindowViewModel : BindableBase, INavigationAware, IRegionMemberLifetime

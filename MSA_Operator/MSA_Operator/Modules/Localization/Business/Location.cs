@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 /// </summary>
 namespace Localization.Business
 {
+    /// <summary>
+    /// Location data
+    /// </summary>
     public class Location : INotifyPropertyChanged
     {
         private string _locationText;
@@ -23,16 +26,7 @@ namespace Localization.Business
                 OnPropertyChanged();
             }
         }
-      /*  private string _imageSource = "../Images/Icon_Vehicle.png";
-        public string ImageSource
-        {
-            get => _imageSource;
-            set
-            {
-                _imageSource = value;
-                OnPropertyChanged();
-            }
-        }*/
+     
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string propertyname = null)

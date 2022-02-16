@@ -13,10 +13,17 @@ using MSAEventAggregator.Core;
 /// </summary>
 namespace Localization.ViewModels
 {
+    /// <summary>
+    /// Viewmodel of Localization control that creates whole view
+    /// </summary>
     public class LocalizationListBtnViewModel : BindableBase
     {
         private readonly IRegionManager _regionManager;
         private IEventAggregator _ea;
+
+        /// <summary>
+        /// Lozalization button click action
+        /// </summary>
         public DelegateCommand<string> NavigateCommand { get; private set; }
         public LocalizationListBtnViewModel(IRegionManager regionManager, IEventAggregator ea)
         {

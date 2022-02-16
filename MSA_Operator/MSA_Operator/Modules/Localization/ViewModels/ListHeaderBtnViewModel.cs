@@ -9,6 +9,9 @@ using System.Linq;
 /// </summary>
 namespace Localization.ViewModels
 {
+    /// <summary>
+    /// View model of localize control 
+    /// </summary>
     public class ListHeaderBtnViewModel : BindableBase
     {
         public ListHeaderBtnViewModel()

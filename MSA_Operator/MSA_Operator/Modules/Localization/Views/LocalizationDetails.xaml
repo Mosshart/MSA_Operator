@@ -20,12 +20,7 @@
         <Border CornerRadius="7" BorderThickness="2" BorderBrush="#050B46" Opacity="0.6"  Margin="82,88,84,88">
             <Label Content="{Binding CurrentLocalizationText}" Margin ="16,8"  Padding="5" Foreground="#050B46" FontFamily="Titillium Web" FontSize="17" BorderBrush="Transparent" BorderThickness="0"/>
         </Border>
-        <!--<Button 
-            Margin="1792,101,98,101"
-            Style="{StaticResource BlankButton}">
-            <Image Source="../Images/Icon_More.png" ></Image>
-        </Button>-->
-
+     
 
         <Image Source="../Images/Icon_Destination.png" Margin="28,173,1862,29" />
         <Border 
@@ -41,10 +36,7 @@
                     BorderBrush="Transparent" BorderThickness="0"
                     />
         </Border>
-        <!--<Button Command="{Binding AddCordinatesToListCommand}" 
-                Style="{StaticResource BlankButton}" Margin="1860,173,30,29">
-            <Image Source="../Images/Icon_Add.png" />
-        </Button>-->
+       
         <Border  Margin="0,232,0,-15"  BorderThickness="0,1,0,0" BorderBrush="#CECECE" OpacityMask="{Binding}">
             <Border.Background>
                 <LinearGradientBrush  StartPoint="0.2,0" EndPoint="0.2,1">

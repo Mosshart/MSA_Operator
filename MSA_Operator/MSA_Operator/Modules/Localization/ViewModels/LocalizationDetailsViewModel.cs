@@ -13,6 +13,9 @@ using Prism.Regions;
 /// </summary>
 namespace Localization.ViewModels
 {
+    /// <summary>
+    /// view model LocalizationDetails  region
+    /// </summary>
     public class LocalizationDetailsViewModel : BindableBase, INavigationAware
     {
         private string _currentLocalizationText= "50.328332, 18.674070";
@@ -20,8 +23,14 @@ namespace Localization.ViewModels
         private readonly IRegionManager _regionManager;
         private readonly IEventAggregator _ea;
 
+        /// <summary>
+        /// Return button click action
+        /// </summary>
         public DelegateCommand ReturnFromDetails { get; private set; }
-        public DelegateCommand AddCordinatesToListCommand { get; private set; }
+        /// <summary>
+        /// add cordinates to list click actions
+        /// </summary>
+      //  public DelegateCommand AddCordinatesToListCommand { get; private set; }
 
 
         public LocalizationDetailsViewModel(IRegionManager regionManager, IEventAggregator ea)
@@ -29,7 +38,7 @@ namespace Localization.ViewModels
             _regionManager = regionManager;
             ReturnFromDetails = new DelegateCommand(OnReturnCommand);
           //  AddCordinatesToListCommand = new DelegateCommand(OnAddCordinatesToList);
-            AddCordinatesToListCommand = new DelegateCommand(AddPinToMap);
+           // AddCordinatesToListCommand = new DelegateCommand(AddPinToMap);
             _ea = ea;
             _ea.GetEvent<CenterLocationChange>().Subscribe(GetMidLocalization);
             _ea.GetEvent<CloseLocalizationDetails>().Subscribe(OnReturnCommand);
@@ -41,31 +50,21 @@ namespace Localization.ViewModels
             DestinationText = obj;
         }
 
-        private void AddPinToMap()
-        {
-            _ea.GetEvent<AddPin>().Publish(true);
-        }
+       /// <summary>
+       /// 
+       /// </summary>
+        //public void OnAddCordinatesToList()
+        //{
+        //    string coordinates = "";
+        //    coordinates = ValidateCoordinates(DestinationText);
 
-        public void OnAddCordinatesToList()
-        {
-            string coordinates = "";
-            coordinates = ValidateCoordinates(DestinationText);
+        //    _ea.GetEvent<AddToListEvent>().Publish(coordinates);
 
-            _ea.GetEvent<AddToListEvent>().Publish(coordinates);
-
-        }
+        //}
 
         private string ValidateCoordinates(string coordString)
         {
-           /* string value1 = coordString.Split(',')[0];
-            string value2 = coordString.Split(',')[1];
-            double temp;
-            bool isPossible = Double.TryParse(value1, out temp);
-            bool isPossible2 = Double.TryParse(value2, out temp);
-
-            return isPossible2 && isPossible2 ? coordString : "error";*/
            return coordString;
-
         }
 
 
@@ -75,12 +74,11 @@ namespace Localization.ViewModels
             var singleView = _regionManager.Regions["LocalizationRegion"].ActiveViews.FirstOrDefault();
             _regionManager.Regions["LocalizationRegion"].Deactivate(singleView);
 
-            _ea.GetEvent<LocalizationFindEvent>().Publish(false);
-            /* bool a = _regionManager.Regions["LocalizationDetails"].NavigationService.Journal.CanGoBack;// Remove(singleView);
-             if(a == true)/
-                 _regionManager.Regions["LocalizationDetails"].NavigationService.Journal.GoBack();*/
+            _ea.GetEvent<LocalizationFindEvent>().Publish(false);           
         }
-
+        /// <summary>
+        /// get/set current localization text 
+        /// </summary>
         public string CurrentLocalizationText
         {
             get => _currentLocalizationText;
@@ -90,6 +88,9 @@ namespace Localization.ViewModels
             }
         }
 
+        /// <summary>
+        /// get/set destination text 
+        /// </summary>
         public string DestinationText
         {
             get => _destinationText;

@@ -12,6 +12,9 @@ using System.Windows;
 /// </summary>
 namespace Localization.ViewModels
 {
+    /// <summary>
+    /// obsolete, not used in application
+    /// </summary>
     public class FavoriteLocalizationListViewModel : BindableBase, INavigationAware
     {
         public DelegateCommand NavigateBackCommand { get; private set; }

@@ -14,6 +14,9 @@ using Prism.Regions;
 /// </summary>
 namespace Localization.ViewModels
 {
+    /// <summary>
+    /// Obsolete not use in application
+    /// </summary>
     public class LocalizationListViewModel : BindableBase
     {
         private ObservableCollection<Location> _locations;
@@ -67,7 +70,7 @@ namespace Localization.ViewModels
             }
         }
 
-        //TEST ONLY
+        // TEST ONLY
         void populateListBox(string location = "")
         {
 

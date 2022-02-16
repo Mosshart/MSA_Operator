@@ -12,12 +12,33 @@ namespace Login.ViewModels
 {
     public class LoginWindowViewModel : BindableBase
     {
+        /// <summary>
+        /// clear textbox button click action
+        /// </summary>
         public DelegateCommand<object> ClearTextBox { get; private set; }
+        /// <summary>
+        /// show text in passwordbox button click action
+        /// </summary>
         public DelegateCommand<object> ShowTextCommand { get; private set; }
+        /// <summary>
+        /// Transtion of text between passwordbox to textbox
+        /// </summary>
         public DelegateCommand<object> PasswordBoxToTextBoxCommand { get; private set; }
+        /// <summary>
+        ///  Transtion of text between textbox to passwordbox
+        /// </summary>
         public DelegateCommand<object> TextBoxToPasswordBoxCommand { get; private set; }
+        /// <summary>
+        /// login button click action
+        /// </summary>
         public DelegateCommand<object> LoginInCommand { get; private set; }
+        /// <summary>
+        /// Mouse acction leftmouse down action
+        /// </summary>
         public DelegateCommand<object> LeftButtonDownTBCommand { get; private set; }
+        /// <summary>
+        /// Mouse acction leftmouse up action
+        /// </summary>
         public DelegateCommand<object> LeftButtonUpTBCommand { get; private set; }
         public DelegateCommand<object> LeftButtonDownPBCommand { get; private set; }
         public DelegateCommand<object> LeftButtonUpPBCommand { get; private set; }
@@ -25,6 +46,7 @@ namespace Login.ViewModels
 
         private readonly IRegionManager _regionManager;
         private DatabaseModel _dbModel;
+
         public LoginWindowViewModel(IRegionManager regionManager, DatabaseModel dbModel)
         {
             _regionManager = regionManager;
@@ -44,7 +66,7 @@ namespace Login.ViewModels
             UpdatePasswordTextOnClick = new DelegateCommand<object>(UpdatePasswordText);
         }
 
-        void UpdatePasswordText(object obj)
+        private void UpdatePasswordText(object obj)
         {
                 TextBox a = obj as TextBox;
 
@@ -93,41 +115,24 @@ namespace Login.ViewModels
             if (passwordBox.Password != PasswordText)
                 PasswordText = passwordBox.Password;
         }
-
         private void TextBoxToPasswordBox(object obj)
         {
             PasswordBox passwordBox = obj as PasswordBox;
             if(passwordBox.Password != PasswordText)
                 passwordBox.Password = PasswordText;
         }
-        /*private void ShowPasswordText(object passwordBox)
-        {
-            TextBox a = passwordBox as TextBox;
-            if (a.Visibility == Visibility.Hidden )
-                a.Visibility = Visibility.Visible;
-            else
-                a.Visibility = Visibility.Hidden;
-        }*/
-
-      
-
-
+     
         private void LogIn(object obj)
         {
-            // if (Username.ToLower() == "admin" && passwordBox.Password == "admin" || Username.ToLower() == "" && passwordBox.Password == "")
             PasswordBox passwordBox = obj as PasswordBox;
             if (_dbModel.ValidateOperatorCredentials(Username, passwordBox.Password))
-            {
-                //_regionManager.RequestNavigate("MainRegion", "Map");
-                // _regionManager.RequestNavigate("WindowRegion","VehicleSelectionWindow" );
+            {             
                 ErrorVisibility = Visibility.Collapsed;
                 _regionManager.RequestNavigate("WindowRegion", "VehicleSelectionWindow");
             }
             else
             {
-
                 ErrorVisibility = Visibility.Visible;
-                // _regionManager.RequestNavigate("WindowRegion", "VehicleSelectionWindow");
             }
             Username = "";
             passwordBox.Password = "";
@@ -139,7 +144,7 @@ namespace Login.ViewModels
             {
                 Username = "";
             }
-        }
+        }       
         
         private Visibility _errorVisibility = Visibility.Collapsed;
 
@@ -177,8 +182,6 @@ namespace Login.ViewModels
             }
         }
         private string _passwordText = "";
-        private string _passwordTrueText = "";
-        private bool _isPasswordShown = false;
         public string PasswordText
         {
             get => _passwordText;
@@ -188,26 +191,11 @@ namespace Login.ViewModels
             }
         }
 
-        private Visibility _paswordVisiblePB = Visibility.Visible;
-        private Visibility PaswordVisiblePB
-        {
-            get => _paswordVisiblePB;
-            set
-            {
-                SetProperty(ref _paswordVisiblePB, value);
-            }
-        }
-        private Visibility _paswordVisibleTB = Visibility.Visible;
-        private Visibility PaswordVisibleTB
-        {
-            get => _paswordVisibleTB;
-            set
-            {
-                SetProperty(ref _paswordVisibleTB, value);
-            }
-        }
-
+       
         private string _eyeIcon  = "../Images/Icon_visibility.png";
+        /// <summary>
+        /// Eye icon 
+        /// </summary>
         public string EyeIcon
         {
             get => _eyeIcon;

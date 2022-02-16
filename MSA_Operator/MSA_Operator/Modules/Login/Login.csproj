@@ -71,7 +71,6 @@
     <Compile Include="ViewModels\LoginOverlayViewModel.cs" />
     <Compile Include="ViewModels\LoginWindowViewModel.cs" />
     <Compile Include="ViewModels\LogoutButtonViewViewModel.cs" />
-    <Compile Include="ViewModels\TestViewModel.cs" />
     <Compile Include="ViewModels\VehicleSelectionWindowViewModel.cs" />
     <Compile Include="Views\AddVehicleWindow.xaml.cs">
       <DependentUpon>AddVehicleWindow.xaml</DependentUpon>
@@ -84,9 +83,6 @@
     </Compile>
     <Compile Include="Views\LogoutButtonView.xaml.cs">
       <DependentUpon>LogoutButtonView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Test.xaml.cs">
-      <DependentUpon>Test.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\VehicleSelectionWindow.xaml.cs">
       <DependentUpon>VehicleSelectionWindow.xaml</DependentUpon>
@@ -124,10 +120,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\LogoutButtonView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Test.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

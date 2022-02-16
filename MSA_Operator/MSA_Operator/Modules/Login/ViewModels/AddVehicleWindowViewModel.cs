@@ -1,9 +1,6 @@
-﻿using Login.Business;
-using Prism.Commands;
+﻿using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
-using System;
-using System.Runtime.InteropServices;
 using System.Net;
 using MSOperatorDBService;
 
@@ -11,16 +8,23 @@ using MSOperatorDBService;
 /// @author Filip Mystek
 /// </summary>
 namespace Login.ViewModels
-{
+{   
+    /// <summary>
+    /// View model of add vehicle control 
+    /// </summary>
     public class AddVehicleWindowViewModel : BindableBase, INavigationAware, IRegionMemberLifetime
     {
-
-        IRegionManager _regionManager;
+        private IRegionManager _regionManager;
         private string _name;
         private string _ipAddress;
         private DatabaseModel _db;
-
+        /// <summary>
+        /// cancel button click action
+        /// </summary>
         public DelegateCommand CancelButtonCommand { get; private set; }
+        /// <summary>
+        /// add vehicle button click action
+        /// </summary>
         public DelegateCommand AddButtonCommand { get; private set; }
 
         public AddVehicleWindowViewModel(IRegionManager regionManager, DatabaseModel dbModel)
@@ -59,6 +63,9 @@ namespace Login.ViewModels
             }
         }
 
+        /// <summary>
+        /// Textbox name 
+        /// </summary>
         public string Name
         {
             get => _name;
@@ -68,6 +75,9 @@ namespace Login.ViewModels
             }
         }
 
+        /// <summary>
+        /// Textbox ipaddress
+        /// </summary>
         public string IpAddress
         {
             get => _ipAddress;
@@ -76,7 +86,7 @@ namespace Login.ViewModels
                 SetProperty(ref _ipAddress, value);
             }
         }
-
+    #region interface implementation
         public bool KeepAlive => false;
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
@@ -93,5 +103,6 @@ namespace Login.ViewModels
         {          
             return;
         }
+    #endregion
     }
 }

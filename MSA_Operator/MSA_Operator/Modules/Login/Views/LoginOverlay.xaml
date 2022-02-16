@@ -8,13 +8,6 @@
              >
     <Grid>
         <Canvas Background="#000000" Opacity="0.38"></Canvas>
-        <!--<Border  CornerRadius="10"  Background="White" Height="388" Width="604"  BorderThickness="1,1,1,1" BorderBrush="#FFFFFF">
-            <Border.Effect>
-                <DropShadowEffect  Direction="270" BlurRadius="25" Opacity="0.2" Color="Black"/>
-            </Border.Effect>
-          
-        </Border>-->
-        <!--<views:LoginWindow HorizontalAlignment="left"  VerticalAlignment="Top" Margin="658,56"/>-->
         <ContentControl HorizontalAlignment="left"  VerticalAlignment="Top" Margin="658,56" prism:RegionManager.RegionName="WindowRegion"/>
     </Grid>
 </UserControl>

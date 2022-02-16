@@ -1,22 +1,17 @@
-﻿using Prism.Commands;
-using Prism.Mvvm;
+﻿using Prism.Mvvm;
 using Prism.Regions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 /// <summary>
 /// @author Filip Mystek
 /// </summary>
 namespace Login.ViewModels
 {
+    /// <summary>
+    /// Overlay class 
+    /// </summary>
     public class LoginOverlayViewModel : BindableBase, INavigationAware
     {
-        public LoginOverlayViewModel()
-        {
-
-        }
-
+        #region interface implementation
         public bool IsNavigationTarget(NavigationContext navigationContext)
         {
             return true;
@@ -35,5 +30,6 @@ namespace Login.ViewModels
             if (test == "A")
                 return;
         }
+        #endregion
     }
 }

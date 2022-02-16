@@ -12,11 +12,18 @@ using System.ComponentModel;
 /// </summary>
 namespace Login.Business
 {
+    /// <summary>
+    /// Vehicle data
+    /// </summary>
     public class VehicleEntity : INotifyPropertyChanged
     {
         private string _name;
         private string _iPAddress;
         private bool _isChecked;
+
+        /// <summary>
+        /// Vehicle name
+        /// </summary>
         public string Name
         {
             get => _name;
@@ -26,6 +33,9 @@ namespace Login.Business
                 OnPropertyChanged();
             }
         }
+        /// <summary>
+        /// Vehicle ip address
+        /// </summary>
         public string IPAddress
         {
             get => _iPAddress;
@@ -35,7 +45,9 @@ namespace Login.Business
                 OnPropertyChanged();
             }
         }
-        
+        /// <summary>
+        /// Is vehicle checked from list
+        /// </summary>
         public bool IsChecked
         {
             get => _isChecked;

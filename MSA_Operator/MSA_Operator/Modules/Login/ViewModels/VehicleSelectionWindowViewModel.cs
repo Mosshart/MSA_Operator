@@ -2,11 +2,8 @@
 using MSAOperator.Services;
 using MSOperatorDBService;
 using Prism.Commands;
-using Prism.Common;
 using Prism.Mvvm;
 using Prism.Regions;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Media;
@@ -18,20 +15,25 @@ namespace Login.ViewModels
 {
     public class VehicleSelectionWindowViewModel : BindableBase, INavigationAware
     {
-        IRegionManager _regionManager;
+        private IRegionManager _regionManager;
         private ObservableCollection<VehicleEntity> _vehicles;
+        /// <summary>
+        /// Vehicles list
+        /// </summary>
         public ObservableCollection<VehicleEntity> Vehicles
         {
             get { return _vehicles; }
-            set {
-             
-                SetProperty(ref _vehicles, value); }
+            set 
+            {             
+                SetProperty(ref _vehicles, value); 
+            }
         }
 
 
         public DelegateCommand<VehicleEntity> SelectedVehicleChangeCommand { get; private set; }
         public DelegateCommand NavigateToAddVehicleCommand { get; private set; }
         public DelegateCommand SelectVehicleCommand { get; private set; }
+
         private DatabaseModel _db;
         private RosNodeService _node;
         public VehicleSelectionWindowViewModel(IRegionManager regionManager, DatabaseModel dbModel, RosNodeService node)
@@ -41,21 +43,10 @@ namespace Login.ViewModels
             _node = node;
             NavigateToAddVehicleCommand = new DelegateCommand(NavigateToAddVehicle);
             SelectVehicleCommand = new DelegateCommand(SelectVehicle);
-            //SelectVehicleCommand = new DelegateCommand(Test);
           
             SelectedVehicleChangeCommand = new DelegateCommand<VehicleEntity>(SelectedVehicleChange);
-            // populateListBox();
-           // VehiclesFromDB();
         }
-        private void Test()
-        {
-            Vehicles.Clear();
-            Vehicles = null;
-            foreach (VehicleEntity x in Vehicles)
-            {
-                x.IsChecked = false;
-            }
-        }
+     
         private void SelectedVehicleChange(VehicleEntity obj)
         {
             if (obj.IsChecked == true) {
@@ -74,7 +65,7 @@ namespace Login.ViewModels
         }
 
 
-        private SolidColorBrush _buttonLoginColor = (SolidColorBrush)new BrushConverter().ConvertFrom("#707070");//("#0FEFAB"
+        private SolidColorBrush _buttonLoginColor = (SolidColorBrush)new BrushConverter().ConvertFrom("#707070");
         public SolidColorBrush ButtonloginColor
         {
             get => _buttonLoginColor;
@@ -97,10 +88,6 @@ namespace Login.ViewModels
                 _regionManager.RequestNavigate("HamburgerMenuBtnRegion", "HamburgerMenuBtn");
                 _regionManager.RequestNavigate("ReturnHomeBtnRegion", "ReturnBtn");
                 _regionManager.RequestNavigate("LocalizenBtnRegion", "ShowOverlay");
-            }
-            else
-            {
-
             }
         }
 
@@ -126,17 +113,11 @@ namespace Login.ViewModels
 
         public void OnNavigatedFrom(NavigationContext navigationContext)
         {
-            //Test();
             return;
         }
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
-            //if (!navigationContext.Parameters.GetValue<bool>("NewVehAdded"))
-            //{
-            //    VehiclesFromDB();
-            //    ButtonloginColor = (SolidColorBrush)new BrushConverter().ConvertFrom("#707070");
-            //}
             if (Vehicles == null)
                 VehiclesFromDB();
             Robots r = navigationContext.Parameters.GetValue<Robots>("VehicleEntity");
@@ -154,13 +135,11 @@ namespace Login.ViewModels
         }
 
        
-        void VehiclesFromDB()
+        private void VehiclesFromDB()
         {
 
             ObservableCollection<VehicleEntity> vehicles = new ObservableCollection<VehicleEntity>();
 
-            //tutaj pobrac pojazdy z bazy danych           
-           
             foreach (Robots veh in _db.GetAllRobots())
             {
                 vehicles.Add(MapDBObjToVehicleEntity(veh));
@@ -168,6 +147,7 @@ namespace Login.ViewModels
             }
             Vehicles = vehicles;
         }
+
         private VehicleEntity MapDBObjToVehicleEntity(Robots robot)
         {
             VehicleEntity output = new VehicleEntity();
@@ -176,7 +156,6 @@ namespace Login.ViewModels
             output.IPAddress = robot.IPAddress;
             output.IsChecked = false;
             return output;
-        }
-      
+        }      
     }
 }

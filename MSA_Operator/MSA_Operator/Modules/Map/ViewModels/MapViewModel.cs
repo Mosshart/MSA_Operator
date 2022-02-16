@@ -2,24 +2,16 @@
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Threading;
 using Map.Business;
 using Microsoft.Maps.MapControl.WPF;
-using Microsoft.Maps.MapControl.WPF.Core;
 using MSAEventAggregator.Core;
 using Prism.Events;
 using Prism.Regions;
-//using Map = Microsoft.Maps.MapControl.WPF.Map;
 using System.Windows.Controls;
 using System.Device.Location;
 using System.Windows;
 using MSAOperator.Services;
-using System.Windows.Media.Imaging;
-using Microsoft.Maps.MapControl.WPF;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -30,25 +22,30 @@ namespace Map.ViewModels
 {
     public class MapViewModel : BindableBase
     {
+        /// <summary>
+        /// change map layer button click actin
+        /// </summary>
         public DelegateCommand ChangeMapLayer { get; private set; }
+        /// <summary>
+        /// Start route button click action
+        /// </summary>
         public DelegateCommand StartRouteCommand { get; private set; }
-       // public DelegateCommand CreatePinOnMap;
+        /// <summary>
+        /// Addpin button click action
+        /// </summary>
         public DelegateCommand<object> AddPinButtonCommand { get; private set; }
+        /// <summary>
+        /// set map view action
+        /// </summary>
         public DelegateCommand<Location> SetViewCommand;
+       
         private readonly IRegionManager _regionManager;
         private IEventAggregator _ea;
-
-        GeoCoordinateWatcher _watcher;
+        private GeoCoordinateWatcher _watcher;
         private MapDetails _mapDetails;
         private GeoLocalizationService _geoLoc;
-        private GeoLocalizationService GeoLoc
-        {
-            get => _geoLoc;
-            set
-            {
-                SetProperty(ref _geoLoc, value);
-            }
-        }
+
+        
         public MapDetails MapDetails
         {
             get { return _mapDetails; }
@@ -56,15 +53,12 @@ namespace Map.ViewModels
         }
         public MapViewModel(IRegionManager regionManager,IEventAggregator ea, GeoLocalizationService GeoLoc)
         {
-            this.GeoLoc = GeoLoc;
+            this._geoLoc = GeoLoc;
             MapDetails = new MapDetails(ea);
-           // MapDetails.OperatorLocation = new Location(GeoLoc.Latitude, GeoLoc.Latitude);
             _regionManager = regionManager;
-            //ChangeMapLayer = new DelegateCommand(OnExecuteChangeMapLayerCommand).ObservesProperty(() => CanChangeLayer);
             ChangeMapLayer = new DelegateCommand(OnExecuteChangeMapLayerCommand).ObservesProperty(() => CanChangeLayer);
             StartRouteCommand = new DelegateCommand(OnExecuteStartRouteCommand).ObservesCanExecute(() => CanCliCkSetRouteLayer);
             AddPinButtonCommand = new DelegateCommand<object>(AddPinButtonPress);
-             //  _localization = localization;
              _ea = ea;
             _ea.GetEvent<LocalizationFindEvent>().Subscribe(HideShowForLocalization);
             _ea.GetEvent<LocalizeEvent>().Subscribe(MessageReceived);
@@ -76,14 +70,11 @@ namespace Map.ViewModels
         {
             //Tutaj start drogi (wyslanie wiadomosci do robota)
 
-
             _ea.GetEvent<CloseLocalizationDetails>().Publish();
         }
 
         private void AddPinButtonPress(object map)
         {
-            //AddPin++;
-            
             AddPinFunc(map);
         }
 
@@ -92,15 +83,11 @@ namespace Map.ViewModels
         {
             if (map == null)
                 map = (Microsoft.Maps.MapControl.WPF.Map)o;
-            //Location loc = (e.NewValue as Location);
             Point centerPoint = new Point((map.ActualWidth / 2), ((map.ActualHeight / 2) + 96));
 
             Location pinLocation = map.ViewportPointToLocation(centerPoint);
 
             Pushpin pin = new Pushpin();
-            //   pin.s
-          //  ControlTemplate template = pin.Template;
-            // template.I
             pin.MouseRightButtonUp += DeletePushpin;
             pin.Location = pinLocation;
             pins = map.Children;
@@ -114,8 +101,7 @@ namespace Map.ViewModels
             Pushpin pushPinTodelete = (sender as Pushpin);
             map.Children.Remove(pushPinTodelete);
             getLocationsToRoute();
-        }
-       
+        }       
         private void getLocationsToRoute()
         {
             UIElementCollection pushpinsInMap = map.Children;
@@ -143,7 +129,6 @@ namespace Map.ViewModels
             if (locations.Count >= 1)
             {
                 LocationCollection locCol = CreateRoute(locations);
-               // LocationCollection locCol = tempRoute();
 
                 MapPolyline routeLine = new MapPolyline()
                 {
@@ -176,6 +161,9 @@ namespace Map.ViewModels
         int statusCounter = 0;
         #region element visibility
         private Visibility _cameraMinimizedVisibility = Visibility.Visible;
+        /// <summary>
+        /// Is minimized camera visible
+        /// </summary>
         public Visibility CameraMinimizedVisibility
         {
             get => _cameraMinimizedVisibility;
@@ -185,6 +173,9 @@ namespace Map.ViewModels
             }
         }
         private Visibility _localizenBtnRegionVisibility = Visibility.Visible;
+        /// <summary>
+        /// Is localize button visible
+        /// </summary>
         public Visibility LocalizenBtnRegionVisibility
         {
             get => _localizenBtnRegionVisibility;
@@ -194,6 +185,9 @@ namespace Map.ViewModels
             }
         }
         private Visibility _midLinesVisibility = Visibility.Collapsed;
+        /// <summary>
+        /// is cross poiting pin to place visible
+        /// </summary>
         public Visibility MidLinesVisibility
         {
             get => _midLinesVisibility;
@@ -203,6 +197,9 @@ namespace Map.ViewModels
             }
         }
         private Visibility _addPinButtonVisibility = Visibility.Collapsed;
+        /// <summary>
+        /// is add pin button visible
+        /// </summary>
         public Visibility AddPinButtonVisibility
         {
             get => _addPinButtonVisibility;
@@ -211,7 +208,6 @@ namespace Map.ViewModels
                 SetProperty(ref _addPinButtonVisibility, value);
             }
         }
-
         private void HideShowForLocalization(bool isHidden)
         {
             Visibility status;
@@ -227,14 +223,13 @@ namespace Map.ViewModels
                 MidLinesVisibility = Visibility.Collapsed; 
                 AddPinButtonVisibility = Visibility.Collapsed;
             }
-            //  MidLinesVisibility = status;
-            CameraMinimizedVisibility = status;
-           // LocalizenBtnRegionVisibility = status;           
+            CameraMinimizedVisibility = status;     
         }
 
         #endregion
 
         private string _textLabelTest;
+
         public string TextLabelTest
         {
             get => _mapDetails.Location.Latitude + ", " + _mapDetails.Location.Longitude + "status: " + statusCounter;
@@ -247,27 +242,25 @@ namespace Map.ViewModels
         static bool x = false;
         private void OnSetView(Location loc)
         {
-            // bool toChange = IsSetView;
             IsSetView = loc;
-            //IsSetView = new Location(0,0);
             if (x)
             {
-               // SetRoute = tempRoute();
                 x = !x;
             }
             else
             {
-              //  SetRoute = tempRoute2();
                 x = !x;
             }
         }
      
-
         private Location _isSetView;
         private LocationCollection _setRoute;
         private bool _canChangeLayer = true;
         private bool _canCliCkSetRouteLayer = false;
         
+        /// <summary>
+        /// get/Set route on map
+        /// </summary>
         public LocationCollection SetRoute
         {
             get => _setRoute;
@@ -277,6 +270,9 @@ namespace Map.ViewModels
             }
         }
         private int _addPin = 0;
+        /// <summary>
+        /// Pin counter
+        /// </summary>
         public int AddPin
         {
             get => _addPin;
@@ -285,6 +281,9 @@ namespace Map.ViewModels
                 SetProperty(ref _addPin, value);
             }
         }
+        /// <summary>
+        /// get/set info is layer changed 
+        /// </summary>
         public bool CanChangeLayer
         {
             get => _canChangeLayer;
@@ -293,6 +292,9 @@ namespace Map.ViewModels
                 SetProperty(ref _canChangeLayer, value);
             }
         }
+        /// <summary>
+        /// Get/set info if route click is possible
+        /// </summary>
         public bool CanCliCkSetRouteLayer
         {
             get => _canCliCkSetRouteLayer;
@@ -301,6 +303,9 @@ namespace Map.ViewModels
                 SetProperty(ref _canCliCkSetRouteLayer, value);
             }
         }
+        /// <summary>
+        /// Get/set map view
+        /// </summary>
         public Location IsSetView
         {
             get => _isSetView;
@@ -327,7 +332,6 @@ namespace Map.ViewModels
 
             setButtonEnableAgain();
         }
-
         private async void setButtonEnableAgain()
         {
             await Task.Delay(1000 * 2);
@@ -345,17 +349,13 @@ namespace Map.ViewModels
         }
         private void AddPinReceived(bool addPin)
         {
-
-            // Location loc = MapControl.ViewportPointToLocation(xy);
-
-           // AddPinButtonCommand();
-           // AddPin++;           // pin.Location = loc;
-            // Adds the pushpin to the map.
-            //MapControl.Children.Add(pin);
         }
         
 
-        private SolidColorBrush _buttonStartColor = (SolidColorBrush) new BrushConverter().ConvertFrom("#707070");//("#0FEFAB"
+        private SolidColorBrush _buttonStartColor = (SolidColorBrush) new BrushConverter().ConvertFrom("#707070");
+        /// <summary>
+        /// Get/set button start color
+        /// </summary>
         public SolidColorBrush ButtonStartColor
         {
             get => _buttonStartColor;

@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
-using System.Linq;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using Microsoft.Maps.MapControl.WPF;
 using Microsoft.Maps.MapControl.WPF.Core;
 using MSAEventAggregator.Core;
@@ -17,9 +10,16 @@ using Prism.Events;
 /// </summary>
 namespace Map.Business
 {
+    /// <summary>
+    /// Map details data
+    /// </summary>
     public class MapDetails : INotifyPropertyChanged
     {
         private readonly IEventAggregator _ea;
+        /// <summary>
+        /// map details constructor
+        /// </summary>
+        /// <param name="ea"></param>
         public MapDetails(IEventAggregator ea)
         {
             _ea = ea;
@@ -27,7 +27,10 @@ namespace Map.Business
        
 
         #region Map 
-        private MapMode _mode = new RoadMode();//new AerialMode(true);
+        private MapMode _mode = new RoadMode();
+        /// <summary>
+        /// get/set map mode (stree/road)
+        /// </summary>
         public MapMode Mode
         {
             get { return _mode; }
@@ -38,6 +41,9 @@ namespace Map.Business
         }
 
         private double _zoomLevel = 20.0;
+        /// <summary>
+        /// Get/set map zoom level
+        /// </summary>
         public double ZoomLevel
         {
             get { return _zoomLevel; }
@@ -55,6 +61,9 @@ namespace Map.Business
         }
 
         private Location _location = new Location(50.321549, 18.664897);
+        /// <summary>
+        /// Get/set current map localizaion
+        /// </summary>
         public Location Location
         {
             get { return _location; }
@@ -67,6 +76,9 @@ namespace Map.Business
         }
 
         private AnimationLevel _animationLevel = AnimationLevel.None;
+        /// <summary>
+        /// get/set map animation level
+        /// </summary>
         public AnimationLevel AnimationLevel
         {
             get { return _animationLevel; }
@@ -78,6 +90,9 @@ namespace Map.Business
         }
 
         private CredentialsProvider _credentials;
+        /// <summary>
+        /// get/set map credentials data
+        /// </summary>
         public CredentialsProvider Credentials
         {
             get { return _credentials; }
@@ -88,6 +103,9 @@ namespace Map.Business
         }
 
         private LocationCollection _locations;
+        /// <summary>
+        /// get/set location point list (markers, pins, object icons)
+        /// </summary>
         public LocationCollection Locations
         {
             get => _locations;
@@ -97,29 +115,10 @@ namespace Map.Business
             }
         }
 
-       /* private Pushpin _operatorPushpin;
-        public Pushpin OperatorPushpin
-        {
-            get => _operatorPushpin;
-            set
-            {
-                _operatorPushpin = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private Pushpin _robotPushpin;
-        public Pushpin RobotPushpin
-        {
-            get => _robotPushpin;
-            set
-            {
-                _robotPushpin = value;
-                OnPropertyChanged();
-            }
-        }
-       */
         private Location _operatorLocation = new Location(50.321340, 18.665592);
+        /// <summary>
+        /// Get/set operator icon location
+        /// </summary>
         public Location OperatorLocation
         {
             get => _operatorLocation;
@@ -132,6 +131,9 @@ namespace Map.Business
         }
 
         private Location _robotLocation = new Location(50.321589, 18.665184);
+        /// <summary>
+        /// Get/set robot icon location
+        /// </summary>
         public Location RobotLocation
         {
             get => _robotLocation;
@@ -143,6 +145,9 @@ namespace Map.Business
         }
 
         private int _robotOrientation = 43;
+        /// <summary>
+        /// Get/set robot icon angle
+        /// </summary>
         public int RobotOrientation
         {
             get => _robotOrientation;
@@ -154,8 +159,9 @@ namespace Map.Business
         }
         private Location _midPinLocation = new Location(0, 0);
 
-      
-
+        /// <summary>
+        /// get/set pin that shows in middle (only for visualization)
+        /// </summary>
         public Location MidPinLocation
         {
             get => _midPinLocation;

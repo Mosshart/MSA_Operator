@@ -33,19 +33,14 @@
                Center="{Binding MapDetails.Location, Mode=TwoWay}"
                
                x:Name="MainMap" Margin="0,0,0,-55"
-               core:MapInteractivity.MapViewChange="{Binding IsSetView, Mode=TwoWay}"
-               core:MapInteractivity.MapRouteChange ="{Binding SetRoute}"
-             
+               core:MapInteractivity.MapViewChange="{Binding IsSetView, Mode=TwoWay}"  
                >
 
             <Canvas Name="Operator" m:MapLayer.Position="{Binding MapDetails.OperatorLocation}"
                     m:MapLayer.PositionOrigin="BottomCenter" Width="30" Height="30">
                 <Image Source="../Images/Icon_Operator_home.png"/>
             </Canvas>
-            <!--<Canvas Name="MidPin" m:MapLayer.Position="{Binding MapDetails.MidPinLocation}"
-                    m:MapLayer.PositionOrigin="BottomCenter" Width="30" Height="30">
-                <Image Source="../Images/Icon_Destination.png"/>
-            </Canvas>-->
+      
             
             <Canvas Name="Robot" m:MapLayer.Position="{Binding MapDetails.RobotLocation}"
                     m:MapLayer.PositionOrigin="BottomCenter" Width="30" Height="56" RenderTransformOrigin="0.5,0.7321">
@@ -68,16 +63,6 @@
                 StrokeThickness="1"/>
             </Canvas>
 
-            <!--<Line   X1="0" 
-                    Y1="0" 
-                    X2="{Binding ElementName='MainMap', Path='ActualWidth'}" 
-                    Y2="{Binding ElementName='MainMap', Path='ActualHeight'}" 
-                    Stroke="Black" StrokeThickness="3" />
-            <Line   X1="0" 
-                    Y1="{Binding ElementName='MainMap', Path='ActualHeight'}" 
-                    X2="{Binding ElementName='MainMap', Path='ActualWidth'}" 
-                    Y2="0" Stroke="Black" StrokeThickness="3" />-->
-            <!--<Image Height="30" Width="30" Style="{StaticResource ShadowImage}" Source="../Images/Icon_Destination.png"/>-->
         </m:Map>
 
         <Button Style="{StaticResource BlankButton}" Margin="1840,380,16,580" 
@@ -86,8 +71,6 @@
         </Button>
         <ContentControl Visibility="{Binding CameraMinimizedVisibility}" Margin="1286,16,30,668" prism:RegionManager.RegionName="CameraMinimized"/>
         <ContentControl Visibility="{Binding LocalizenBtnRegionVisibility}" Margin="1840,853,16,107" prism:RegionManager.RegionName="LocalizenBtnRegion"/>
-        <!--<ContentControl Margin="30,864,1730,56" prism:RegionManager.RegionName="MovementButton"/>-->
-        <!--<ContentControl Margin="1840,848,16,112" prism:RegionManager.RegionName="LocalizeBtn"/>-->
         <ContentControl Margin="0,0,0,0" prism:RegionManager.RegionName="LocalizeOverlay"/>
 
 

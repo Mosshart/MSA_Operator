@@ -17,7 +17,7 @@ namespace ReturnHomeBtn.ViewModels
         private IEventAggregator _ea;
 
         /// <summary>
-        /// button click action
+        /// return gome button click action
         /// </summary>
         public DelegateCommand ReturnHomeBtnCommand { get; private set; }
         public ReturnBtnViewModel(IEventAggregator ea)

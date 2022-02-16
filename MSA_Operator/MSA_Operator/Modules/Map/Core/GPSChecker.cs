@@ -1,15 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Device.Location;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 /// <summary>
 /// @author Filip Mystek
 /// </summary>
 namespace Map.Core
 {
+    /// <summary>
+    /// obsolete, use only as reference 
+    /// Class not used, funcionality moved to services, 
+    /// </summary>
     class GPSChecker
     {
         double latToshow = 0.0;

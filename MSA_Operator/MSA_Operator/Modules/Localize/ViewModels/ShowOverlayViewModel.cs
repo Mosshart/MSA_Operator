@@ -11,18 +11,24 @@ using Prism.Regions;
 /// </summary>
 namespace Localize.ViewModels
 {
+    /// <summary>
+    /// View model of show overlay control 
+    /// </summary>
     public class ShowOverlayViewModel : BindableBase
     {
         private readonly IRegionManager _regionManager;
         private IEventAggregator _ea;
 
-        public DelegateCommand<string> NavigateCommand { get; private set; }
+        /// <summary>
+        /// On show overlay button click action
+        /// </summary>
+        public DelegateCommand<string> ShowOverlay { get; private set; }
 
         public ShowOverlayViewModel(IRegionManager regionManager, IEventAggregator ea)
         {
             _regionManager = regionManager;
 
-            NavigateCommand = new DelegateCommand<string>(Navigate);
+            ShowOverlay = new DelegateCommand<string>(Navigate);
         }
         private void Navigate(string navigatePath)
         {

@@ -6,7 +6,7 @@
              Width="64" Height="64">
     <Grid>
         <Button Background="Transparent"
-                Command="{Binding NavigateCommand}"
+                Command="{Binding ShowOverlay}"
                 CommandParameter="MainOverlay" 
                 BorderThickness="0"
                 BorderBrush="Transparent"

@@ -9,9 +9,7 @@ namespace Localize
     {
         public void OnInitialized(IContainerProvider containerProvider)
         {
-            var regionManager = containerProvider.Resolve<IRegionManager>();
-            //regionManager.RegisterViewWithRegion("LocalizeBtn", typeof(Views.ShowOverlay));
-            //regionManager.RegisterViewWithRegion("LocalizeOverlay", typeof(Views.MainOverlay));
+            var regionManager = containerProvider.Resolve<IRegionManager>();          
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)

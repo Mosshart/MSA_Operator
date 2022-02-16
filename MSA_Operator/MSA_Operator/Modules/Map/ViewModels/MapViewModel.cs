@@ -22,6 +22,10 @@ using System.Windows.Media.Imaging;
 using Microsoft.Maps.MapControl.WPF;
 using System.Windows.Input;
 using System.Windows.Media;
+
+/// <summary>
+/// @author Filip Mystek
+/// </summary>
 namespace Map.ViewModels
 {
     public class MapViewModel : BindableBase

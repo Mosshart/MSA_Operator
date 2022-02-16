@@ -8,6 +8,9 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interactivity;
 
+/// <summary>
+/// @author Filip Mystek
+/// </summary>
 namespace MovementButton.Behaviours
 {
     class MouseBehaviour : Behavior<Panel>

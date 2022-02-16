@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Threading;
 
+/// <summary>
+/// @author Filip Mystek
+/// </summary>
 namespace StatusBar.ViewModels
 {
     public class ClockViewModel : BindableBase

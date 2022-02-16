@@ -5,6 +5,9 @@ using Prism.Regions;
 
 namespace Camera
 {
+    /// <summary>
+    /// @author Filip Mystek
+    /// </summary>
     public class CameraModule : IModule
     {
         public void OnInitialized(IContainerProvider containerProvider)

@@ -12,6 +12,9 @@ using Microsoft.Maps.MapControl.WPF.Core;
 using MSAEventAggregator.Core;
 using Prism.Events;
 
+/// <summary>
+/// @author Filip Mystek
+/// </summary>
 namespace Map.Business
 {
     public class MapDetails : INotifyPropertyChanged

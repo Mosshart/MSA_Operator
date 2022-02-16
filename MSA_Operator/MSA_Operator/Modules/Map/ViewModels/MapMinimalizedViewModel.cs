@@ -10,6 +10,9 @@ using MSAEventAggregator.Core;
 using Prism.Events;
 using Prism.Regions;
 
+/// <summary>
+/// @author Filip Mystek
+/// </summary>
 namespace Map.ViewModels
 {
     public class MapMinimalizedViewModel : BindableBase

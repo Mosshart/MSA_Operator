@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/// <summary>
+/// 
+/// </summary>
 namespace MSOperatorDBService
 {
     public class DatabaseModel
@@ -68,6 +71,12 @@ namespace MSOperatorDBService
             }
         }
 
+        /// <summary>
+        /// Validation for operator login credetials
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         public bool ValidateOperatorCredentials(string username, string password)
         {
             bool isValid = false;
@@ -88,6 +97,11 @@ namespace MSOperatorDBService
             return isValid;
         }
 
+
+        /// <summary>
+        /// Get list of all robots from database
+        /// </summary>
+        /// <returns></returns>
         public List<Robots> GetAllRobots()
         {
             List<Robots> robots = new List<Robots>();
@@ -105,6 +119,10 @@ namespace MSOperatorDBService
             return robots;
         }
 
+        /// <summary>
+        /// Add robot to database
+        /// </summary>
+        /// <param name="r"></param>
         public void AddRobotToDB(Robots r)
         {
             using (var contex = new MSAOperatorDBEntities())

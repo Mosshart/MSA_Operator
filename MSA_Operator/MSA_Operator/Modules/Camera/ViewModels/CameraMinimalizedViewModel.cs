@@ -18,8 +18,12 @@ using System.Configuration;
 using System.Drawing;
 using static System.Net.Mime.MediaTypeNames;
 
+/// <summary>
+/// @author Filip Mystek
+/// </summary>
 namespace Camera.ViewModels
 {
+
     public class CameraMinimalizedViewModel : BindableBase
     {
         public CameraMinimalizedViewModel()

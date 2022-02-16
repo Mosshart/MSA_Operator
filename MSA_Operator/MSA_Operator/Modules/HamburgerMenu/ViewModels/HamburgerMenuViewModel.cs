@@ -5,6 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// @author Filip Mystek
+/// </summary>
 namespace HamburgerMenu.ViewModels
 {
     public class HamburgerMenuViewModel : BindableBase, INavigationAware

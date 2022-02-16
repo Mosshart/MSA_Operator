@@ -8,6 +8,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 
+/// <summary>
+/// @author Filip Mystek
+/// </summary>
 namespace ReturnHomeBtn.ViewModels
 {
     public class ReturnBtnViewModel : BindableBase

@@ -12,6 +12,9 @@ using RosCommunication;
 using RosCommunication.Messages.geometry_msgs;
 using MSAOperator.Services;
 
+/// <summary>
+/// @author Filip Mystek
+/// </summary>
 namespace MovementButton.ViewModels
 {
     public class MovementButtonViewModel : BindableBase

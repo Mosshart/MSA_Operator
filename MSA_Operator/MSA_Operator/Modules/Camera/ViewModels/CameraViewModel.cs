@@ -10,6 +10,9 @@ using RosCommunication.Messages.sensor_msgs;
 using MSAOperator.Services;
 using System.IO;
 
+/// <summary>
+/// @author Filip Mystek
+/// </summary>
 namespace Camera.ViewModels
 {
     public class CameraViewModel : BindableBase, INavigationAware

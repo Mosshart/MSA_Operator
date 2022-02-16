@@ -5,6 +5,9 @@ using System.Windows;
 using Prism.Events;
 using MSAEventAggregator.Core;
 
+/// <summary>
+/// @author Filip Mystek
+/// </summary>
 namespace MSA_Operator.ViewModels
 {
     public class MainWindowViewModel : BindableBase

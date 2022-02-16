@@ -12,6 +12,9 @@ using System.Windows.Media.Imaging;
 using System.Xml.Linq;
 using Microsoft.Maps.MapControl.WPF;
 
+/// <summary>
+/// @author Filip Mystek
+/// </summary>
 namespace Map.Core
 {
     class MapInteractivity

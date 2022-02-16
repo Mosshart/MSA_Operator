@@ -11,6 +11,9 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Media;
 
+/// <summary>
+/// @author Filip Mystek
+/// </summary>
 namespace Login.ViewModels
 {
     public class VehicleSelectionWindowViewModel : BindableBase, INavigationAware

@@ -4,7 +4,6 @@ using MSAOperator.Services.BatteryService.Operator;
 using MSAOperator.Services.BatteryService.Robot;
 using Prism.Commands;
 using Prism.Mvvm;
-//using StatusBar.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +12,9 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
 
+/// <summary>
+/// @author Filip Mystek
+/// </summary>
 namespace StatusBar.ViewModels
 {
     public class BatteryViewModel : BindableBase

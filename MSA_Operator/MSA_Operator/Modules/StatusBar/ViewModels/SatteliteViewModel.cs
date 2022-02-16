@@ -4,6 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// @author Filip Mystek
+/// </summary>
 namespace StatusBar.ViewModels
 {
     public class SatteliteViewModel : BindableBase

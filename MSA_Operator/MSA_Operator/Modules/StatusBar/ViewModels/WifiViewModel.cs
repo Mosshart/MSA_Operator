@@ -6,6 +6,9 @@ using System.IO;
 using System.Linq;
 using System.Windows.Threading;
 
+/// <summary>
+/// @author Filip Mystek
+/// </summary>
 namespace StatusBar.ViewModels
 {
     public class WifiViewModel : BindableBase

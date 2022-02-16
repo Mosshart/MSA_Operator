@@ -9,13 +9,16 @@ using System.Linq;
 /// </summary>
 namespace StatusBar.ViewModels
 {
+    /// <summary>
+    /// Viewmodel of LTE control
+    /// </summary>
     public class LTEViewModel : BindableBase
     {
-        public LTEViewModel()
-        {
-
-        }
+      
         private string _lTEPower = @"../Images/Icon_LTE_3.png";
+        /// <summary>
+        /// get/set lte power text
+        /// </summary>
         public string LTEPower
         {
             get

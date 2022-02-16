@@ -10,30 +10,20 @@ using System.Linq;
 /// </summary>
 namespace StatusBar.ViewModels
 {
+    /// <summary>
+    /// Viewmodel of statusbar control
+    /// </summary>
     public class StatusBarViewModel : BindableBase
     {
         private WLanInfoService _wlan;
-        public WLanInfoService Wlan
-        {
-            get => _wlan;
-            set
-            {
-                SetProperty(ref _wlan, value);
-            }
-        }
+       
         private GeoLocalizationService _geoLoc;
-        public GeoLocalizationService GeoLoc
-        {
-            get => _geoLoc;
-            set
-            {
-                SetProperty(ref _geoLoc, value);
-            }
-        }
+        
+    
         public StatusBarViewModel(WLanInfoService wlan, GeoLocalizationService GeoLoc)
         {
-            this.Wlan = wlan; 
-            this.GeoLoc = GeoLoc;
+            this._wlan = wlan; 
+            this._geoLoc = GeoLoc;
         }
 
     }

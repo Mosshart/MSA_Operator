@@ -9,6 +9,9 @@ using System.Linq;
 /// </summary>
 namespace StatusBar.ViewModels
 {
+    /// <summary>
+    /// Viewmodel of sattelite counter control
+    /// </summary>
     public class SatteliteViewModel : BindableBase
     {
         public SatteliteViewModel()
@@ -16,6 +19,9 @@ namespace StatusBar.ViewModels
 
         }
         private string _satelliteNumber = "3";
+        /// <summary>
+        /// get/set satelite number text
+        /// </summary>
         public string SatelliteNumber
         {
             get

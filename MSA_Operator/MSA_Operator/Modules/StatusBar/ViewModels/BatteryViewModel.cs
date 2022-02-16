@@ -1,41 +1,26 @@
-﻿using MSAOperator.Services;
-using MSAOperator.Services.BatteryService;
-using MSAOperator.Services.BatteryService.Operator;
-using MSAOperator.Services.BatteryService.Robot;
-using Prism.Commands;
+﻿using MSAOperator.Services.BatteryService;
 using Prism.Mvvm;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows;
-using System.Windows.Controls.Primitives;
-using System.Windows.Media.Animation;
-using System.Windows.Threading;
 
 /// <summary>
 /// @author Filip Mystek
 /// </summary>
 namespace StatusBar.ViewModels
 {
+    /// <summary>
+    /// View model of battery control 
+    /// </summary>
     public class BatteryViewModel : BindableBase
     {
-        //  private DispatcherTimer _timer;
         BatteryInfoServiceBase _batteryInfo = null; 
         public BatteryInfoServiceBase BatteryInfo
         {
             get => _batteryInfo;
             set
             {
-               /* if (ModelType != ModelType.Operator)
-                    SetProperty(ref _batteryInfo, new OperatorBatteryInfoService());
-                else */
-                    SetProperty(ref _batteryInfo, value);
+                SetProperty(ref _batteryInfo, value);
             }
         }
-        public BatteryViewModel()
-        {
-            //_batteryInfo = batteryInfo;
-        }
+        
         #region private
         private string _batteryColor = "#FFFFFF";
         private string _batteryTextColor = "#FFFFFF";
@@ -44,6 +29,9 @@ namespace StatusBar.ViewModels
         private ModelType _modelType;
         #endregion
         #region public
+        /// <summary>
+        /// Get/set battery icon color 
+        /// </summary>
         public string BatteryColor
         {
             get { return _batteryColor; }
@@ -52,6 +40,9 @@ namespace StatusBar.ViewModels
                 SetProperty(ref _batteryColor, value);
             }
         }
+        /// <summary>
+        /// get/set battery information text color 
+        /// </summary>
         public string BatteryTextColor
         {
             get { return _batteryTextColor; }
@@ -60,18 +51,26 @@ namespace StatusBar.ViewModels
                 SetProperty(ref _batteryTextColor, value);
             }
         }
+        /// <summary>
+        /// Get/set battery text
+        /// </summary>
         public string BatteryPercentText
         {
             get { return _batteryPercent.ToString() + "%"; }
             set { SetProperty(ref _batteryPercentText, value); }
         }
 
+        /// <summary>
+        /// Get/set battery text integer
+        /// </summary>
         public int BatteryPercent
         {
             get { return _batteryPercent; }
             set { SetProperty(ref _batteryPercent, value); }
         }
-
+        /// <summary>
+        /// Get/set battery type robot/operator
+        /// </summary>
         public ModelType ModelType
         {
             get { return _modelType; }
@@ -101,7 +100,9 @@ namespace StatusBar.ViewModels
 #endregion
 
     }
-
+    /// <summary>
+    /// Kind of battery
+    /// </summary>
     public enum ModelType
     {
         Default = 0,

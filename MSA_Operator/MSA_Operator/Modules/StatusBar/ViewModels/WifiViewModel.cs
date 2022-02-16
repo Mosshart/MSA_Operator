@@ -11,10 +11,16 @@ using System.Windows.Threading;
 /// </summary>
 namespace StatusBar.ViewModels
 {
+    /// <summary>
+    /// Viewmodel of wifi control
+    /// </summary>
     public class WifiViewModel : BindableBase
     {
         
-        public DispatcherTimer _timer;
+        private DispatcherTimer _timer;
+        /// <summary>
+        /// wifi status constructor 
+        /// </summary>
         public WifiViewModel()
         {
             _timer = new DispatcherTimer(DispatcherPriority.Render);
@@ -55,6 +61,9 @@ namespace StatusBar.ViewModels
         }
 
         private string _wifiPower = @"../Images/Icon_Wifi.png";
+        /// <summary>
+        /// get/set wifi power image as path to file in string
+        /// </summary>
         public string WifiPower
         {
             get

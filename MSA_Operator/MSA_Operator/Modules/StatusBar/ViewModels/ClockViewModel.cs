@@ -10,9 +10,15 @@ using System.Windows.Threading;
 /// </summary>
 namespace StatusBar.ViewModels
 {
+    /// <summary>
+    /// Viewmodel of clock control
+    /// </summary>
     public class ClockViewModel : BindableBase
     {
         private string _currentTime;
+        /// <summary>
+        /// get/set currenttime text
+        /// </summary>
         public string CurrentTime
         {
             get

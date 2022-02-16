@@ -8,12 +8,13 @@ using System.IO;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
+/// <summary>
+/// @author Filip Mystek
+/// </summary>
 namespace MSAOperator.Services
 {
     public class GeoLocalizationService : INotifyPropertyChanged
     {
-       
-
         private double _latitude;
         /// <summary>
         ///  Current Latitude
@@ -64,6 +65,9 @@ namespace MSAOperator.Services
 
         private GeoCoordinateWatcher _watcher;
 
+        /// <summary>
+        // gelozalization constructor
+        /// </summary>
         public GeoLocalizationService()
         {
             _watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.High);

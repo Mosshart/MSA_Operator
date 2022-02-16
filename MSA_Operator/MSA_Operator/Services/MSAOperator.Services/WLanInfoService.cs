@@ -7,6 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Threading;
 
+/// <summary>
+/// @author Filip Mystek
+/// </summary>
 namespace MSAOperator.Services
 {
     public class WLanInfoService : INotifyPropertyChanged
@@ -31,6 +34,9 @@ namespace MSAOperator.Services
         #endregion
 
         #region public 
+        /// <summary>
+        /// Get/set wifi name
+        /// </summary>
         public string WifiName {
             get => _wifiName;
             private set
@@ -42,6 +48,9 @@ namespace MSAOperator.Services
                 }
             }
         }
+        /// <summary>
+        /// get/set wifi power level
+        /// </summary>
         public int WifiPower
         {
             get => _wifiPower;
@@ -54,10 +63,15 @@ namespace MSAOperator.Services
                 }
             }
         }
+        /// <summary>
+        /// wifi status
+        /// </summary>
         public WiFiPower WifiStatus = WiFiPower.wifi_disable;
 
         #endregion
-
+        /// <summary>
+        /// constructor of wlaninfo, starts ticker to update wifi status
+        /// </summary>
         public WLanInfoService()
         {
             _timer = new DispatcherTimer(DispatcherPriority.Render);

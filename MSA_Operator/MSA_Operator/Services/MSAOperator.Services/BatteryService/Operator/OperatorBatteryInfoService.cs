@@ -6,14 +6,22 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
+/// <summary>
+/// @author Filip Mystek
+/// </summary>
 namespace MSAOperator.Services.BatteryService.Operator
 {
-
+    /// <summary>
+    /// pass data to BatteryInfoServiceBase to compute data
+    /// </summary>
     public class OperatorBatteryInfoService : BatteryInfoServiceBase
     {
         public OperatorBatteryInfoService() : base(new ServiceOperator()) {}
     }
 
+    /// <summary>
+    /// create operator battery service
+    /// </summary>
     public class ServiceOperator : IBatteryInfoService
     {
         public override IBatteryInfoData GetBatteryInformation()
@@ -22,20 +30,42 @@ namespace MSAOperator.Services.BatteryService.Operator
         }
     }
 
+    /// <summary>
+    /// robot battery info data class
+    /// </summary>
     public class OpertatorBatteryInfo : IBatteryInfoData
     {
+        /// <summary>
+        /// capacity of robot battery
+        /// </summary>
         public int DesignedMaxCapacity { get; set; }
+        /// <summary>
+        /// fully charged battery capacity
+        /// </summary>
         public int FullChargeCapacity { get; set; }
+        /// <summary>
+        /// current battery capacity 
+        /// </summary>
         public uint CurrentCapacity { get; set; }
+        /// <summary>
+        /// battery voltage
+        /// </summary>
         public uint Voltage { get; set; }
+        /// <summary>
+        /// battery discharge rate (if possible)
+        /// </summary>
         public int DischargeRate { get; set; }
     }
 
-
-
-
+    /// <summary>
+    /// Gets battery info from windows machine
+    /// </summary>
     public static class BatteryInfo
     {
+        /// <summary>
+        /// Get battery info from windows machine (used in operator tablet device)
+        /// </summary>
+        /// <returns></returns>
         public static IBatteryInfoData GetBatteryInformation()
         {
             IntPtr deviceDataPointer = IntPtr.Zero;
